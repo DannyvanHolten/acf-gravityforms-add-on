@@ -1,13 +1,12 @@
 <?php
 /*
-Plugin Name: Advanced Custom Fields: Gravity Forms Field
-Plugin URI: https://github.com/stormuk/Gravity-Forms-ACF-Field
-Description: ACF field to select one or many Gravity Forms
-Version: 1.1.0
-Author: @adam_pope of @stormuk
-Author URI: http://www.stormconsultancy.co.uk
-License: MIT
-License URI: http://opensource.org/licenses/MIT
+Plugin Name: ACF Gravityforms Field
+Plugin URI: https://github.com/dannyvanholten/gravityforms-acf-field
+Description: Advanced Custom Field to select a Gravity Form
+Version: 0.1
+Author: Danny van Holten
+Author URI: http://www.dannyvanholten.com/
+Copyright: Danny van Holten
 */
 
 // $version = 5 and can be ignored until ACF6 exists
