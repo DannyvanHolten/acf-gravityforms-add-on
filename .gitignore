@@ -1,0 +1,8 @@
+node_modules
+build
+vendor/*
+!vendor/autoload.php
+!vendor/composer
+vendor/composer/*
+!vendor/composer/autoload*
+!vendor/composer/ClassLoader.php

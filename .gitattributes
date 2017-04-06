@@ -1,0 +1,21 @@
+assets/ export-ignore
+scss/ export-ignore
+js/**/ export-ignore
+
+.csscomb.json export-ignore
+.postcss-sorting.json export-ignore
+
+composer.json export-ignore
+composer.lock export-ignore
+
+Gruntfile.js export-ignore
+package.json export-ignore
+yarn.lock export-ignore
+
+.gitignore export-ignore
+.gitattributes export-ignore
+.gitkeep export-ignore
+
+*.map export-ignore
+README.md export-ignore
+CHANGELOG.md export-ignore
