@@ -12,6 +12,8 @@ Advanced Custom Field with which we can select Gravityforms.
 
 == Description ==
 
+Advanced Custom Field with which we can select Gravityforms.
+
 Finally the Advanced Custom Fields: Gravityforms Add-on is available on the WordPress plugin repository!
 
 == Installation ==
