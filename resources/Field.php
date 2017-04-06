@@ -188,14 +188,14 @@ class Field extends acf_field
 			}
 
 			if (empty($field['return_format'])) {
-				$field['return_format'] = 'form_object';
+				$field['return_format'] = 'post_object';
 			}
 
 			if ($field['return_format'] === 'id') {
 				return (int)$value;
 			}
 
-			if ($field['return_format'] === 'form_object') {
+			if ($field['return_format'] === 'post_object') {
 				$form = GFAPI::get_form($value);
 				//Return the form object if it's not an error object. Otherwise return false.
 				if (!is_wp_error($form)) {
