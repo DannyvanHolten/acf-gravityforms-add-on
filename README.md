@@ -20,6 +20,34 @@ or if you make use of WPackagist
 
 `composer require wpackagist/gravityforms-acf-field`
 
+## Using Advanced Custom Fields: Gravityforms Add-on
+
+To use the the field you just need to know how advanced custom fields work. You can check out [their documentation](https://www.advancedcustomfields.com/resources/)
+
+The Gravityforms Add-on returns either an single form object / id or an array of objects / id's
+Now we know that we can easily use it to build our fields :)
+
+#### If you return an ID
+```
+$form = get_field('my-form');
+gravity_form($form, true, true, false, '', true, 1); 
+```
+
+#### If you return an Object
+```
+$form = get_field('my-form');
+gravity_form($form['id'], true, true, false, '', true, 1); 
+```
+
+### If you return multiple Form ID's
+```
+$forms = get_field('my-form');
+
+foreach($forms as $form) {
+    gravity_form($form, true, true, false, '', true, 1); 
+}
+```
+
 ## Getting involved
 
 Want to get involved and improve Advanced Custom Fields: Gravityforms Add-on? Fork this repo and whenever you have something just make a pull request. After review we might add it to the [Gravityforms ACF Field GitHub Repository.](https://github.com/DannyvanHolten/gravityforms-acf-field)
