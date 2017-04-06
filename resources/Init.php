@@ -13,16 +13,16 @@ class Init
 	private function addHooks()
 	{
 		add_action('acf/include_field_types', [$this, 'addField']);
-//		add_action('acf/register_fields', [$this, 'addFieldV4']);
+		add_action('acf/register_fields', [$this, 'DeprecatedField']);
 	}
 
 	public function addField()
 	{
-		require_once(__DIR__ . 'Field.php');
+		new Field();
 	}
 
-	public function addFieldV4()
+	public function addDeprecatedField()
 	{
-		require_once(__DIR__ . 'FieldV4.php');
+		new DeprecatedField();
 	}
 }
