@@ -14,6 +14,7 @@ class Field extends acf_field
 		$this->label = __('Forms', 'gravityforms');
 		$this->category = __('Relational', 'acf');
 		$this->defaults = [
+			'return_format'  => 'form_object',
 			'allow_multiple' => 0,
 			'allow_null'     => 0
 		];
@@ -29,6 +30,19 @@ class Field extends acf_field
 	 */
 	public function render_field_settings($field)
 	{
+		// Render a field settings that will tell us if an empty field is allowed or not
+		acf_render_field_setting($field, [
+			'label'        => __('Return Value', 'acf'),
+			'instructions' => __('Specify the returned value on front end', 'acf'),
+			'type'         => 'radio',
+			'name'         => 'return_format',
+			'layout'       => 'horizontal',
+			'choices'      => [
+				'form_object' => __('Post Object', 'acf'),
+				'id'          => __('Post ID', 'acf')
+			],
+		]);
+
 		// Render a field setting that will tell us if an empty field is allowed or not.
 		acf_render_field_setting($field, [
 			'label'   => __('Allow Null?', 'acf'),
@@ -138,32 +152,58 @@ class Field extends acf_field
 	 */
 	public function format_value($value, $post_id, $field)
 	{
-		//If there are multiple forms, construct and return an array of form objects
-		if (!empty($value) && is_array($value)) {
+		return $this->process_value($value, $field);
+	}
 
+	/**
+	 * Check what to return on basis of return format
+	 *
+	 * @param $value
+	 * @param $field
+	 * @return array|bool|int
+	 */
+	private function process_value($value, $field)
+	{
+		if (is_array($value)) {
 			$form_objects = [];
-			foreach ($value as $key => $formId) {
-				$form = GFAPI::get_form($formId);
-
-				if (!is_wp_error($form)) { // Add it if it's not an error object
-					$form_objects[$key] = $form;
+			foreach ($value as $k => $v) {
+				$form = $this->process_value($v, $field);
+				//Add it if it's not an error object
+				if ($form) {
+					$form_objects[$k] = $form;
 				}
 			}
-
-			if (!empty($form_objects)) { //Return false if the array is empty
+			//Return false if the array is empty
+			if (!empty($form_objects)) {
 				return $form_objects;
+			} else {
+				return false;
+			}
+		} else {
+
+			if (!is_array($field)) {
+				$field = [];
+			}
+			if (empty($field['return_format'])) {
+
+				$field['return_format'] = 'form_object';
 			}
 
-		} elseif (!empty($value)) {  // If not an array return single form object
 
-			$form = GFAPI::get_form($value);
-			if (!is_wp_error($form)) { // Return the form object if it's not an error object. Otherwise return false.
-				return $form;
+			if ($field['return_format'] === 'id') {
+				return intval($value);
 			}
+
+			if ($field['return_format'] === 'form_object') {
+				$form = GFAPI::get_form(intval($value));
+				//Return the form object if it's not an error object. Otherwise return false.
+				if (!is_wp_error($form)) {
+					return $form;
+				}
+			}
+			return false;
 
 		}
 
-		// Return false if value is empty
-		return false;
 	}
 }
