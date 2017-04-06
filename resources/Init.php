@@ -1,6 +1,6 @@
 <?php
 
-namespace ACFGravityforms;
+namespace ACFGravityformsField;
 
 class Init
 {

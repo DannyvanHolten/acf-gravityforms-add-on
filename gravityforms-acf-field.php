@@ -25,7 +25,7 @@ define('GF_ACF_FIELD_RESOURCES', __DIR__ . '/resources/');
 require_once __DIR__ . '/vendor/autoload.php';
 
 // Initiate the field!
-new ACFGravityforms\Init();
+new ACFGravityformsField\Init();
 
 
 ////Added to check if Gravity Forms is installed on activation.
