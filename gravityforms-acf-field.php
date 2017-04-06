@@ -25,26 +25,25 @@ define('GF_ACF_FIELD_RESOURCES', __DIR__ . '/resources/');
 require_once __DIR__ . '/vendor/autoload.php';
 
 // Initiate the field!
-new acf_field_gravityforms();
-add_action('acf/include_field_types', 'include_field_types_gravityforms');
+new ACFGravityforms/Init();
 
 
-//Added to check if Gravity Forms is installed on activation.
-function gff_activate() {
-
-    if (class_exists('RGFormsModel')) {
-
-			return true;
-
-		}	else {
-
-			$html = '<div class="notice notice-error">';
-				$html .= '<p>';
-					$html .= __( 'Warning: Gravity Forms is not installed or activated. This plugin does not function without Gravity Forms!', 'gravityforms-acf-field' );
-				$html .= '</p>';
-			$html .= '</div>';
-			echo $html;
-
-		}
-}
-register_activation_hook( __FILE__, 'gff_activate' );
+////Added to check if Gravity Forms is installed on activation.
+//function gff_activate() {
+//
+//    if (class_exists('RGFormsModel')) {
+//
+//			return true;
+//
+//		}	else {
+//
+//			$html = '<div class="notice notice-error">';
+//				$html .= '<p>';
+//					$html .= __( 'Warning: Gravity Forms is not installed or activated. This plugin does not function without Gravity Forms!', 'gravityforms-acf-field' );
+//				$html .= '</p>';
+//			$html .= '</div>';
+//			echo $html;
+//
+//		}
+//}
+//register_activation_hook( __FILE__, 'gff_activate' );

@@ -1,6 +1,10 @@
 <?php
 
-class acf_field_gravityforms extends acf_field
+namespace ACFGravityforms;
+
+use acf_field;
+
+class Field extends acf_field
 {
 	/**
 	 * acf_field_gravity_forms constructor.
@@ -33,8 +37,8 @@ class acf_field_gravityforms extends acf_field
 	 */
 
 	/**
-     * Create extra settings for our gravityforms field. These are visible when editing a field.
-     *
+	 * Create extra settings for our gravityforms field. These are visible when editing a field.
+	 *
 	 * @param $field
 	 */
 	public function render_field_settings($field)

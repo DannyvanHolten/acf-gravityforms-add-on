@@ -11,9 +11,9 @@
     }
   ],
   "autoload": {
-    "classmap": [
-      "resources/acf_field_gravityforms.php"
-    ]
+    "psr-4": {
+      "ACFGravityforms\\": "resources/"
+    }
   },
   "require": {
     "php": ">=5.6.4",
