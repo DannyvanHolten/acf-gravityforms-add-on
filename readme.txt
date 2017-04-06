@@ -16,6 +16,8 @@ Advanced Custom Field with which we can select Gravityforms.
 
 Finally the Advanced Custom Fields: Gravityforms Add-on is available on the WordPress plugin repository!
 
+Any documentation can be found on: [Gravityforms ACF Field GitHub Repository.](https://github.com/DannyvanHolten/gravityforms-acf-field)
+
 == Installation ==
 
 The plugin is available from the [WordPress plugin repository](http://www.wordpress.org/plugins/gravityforms-acf-field)
