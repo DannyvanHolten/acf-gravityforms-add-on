@@ -5,21 +5,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+* Documentation for WordPress
+
+## [0.2] - 2017-04-07
 ### Changed
-* Improved code commenting in the plugin
-* Improved padding for the update-nag
+* Refactor the entire repo. Doesn't look the same at all anymore
 
-## [1.0] - 2017-03-27
-### Fixed
-* Readme.txt is now according to WordPress standards
-
+## 0.1 - 2017-03-25
 ### Added
-* Added screenshots to the WordPress assets
-* Added Dutch, German, Spanish & Portuguese translations.
+* The repo is set up 
 
-## 0.9 - 2017-03-25
-### Added
-* The repo is set up and all the styling, javascript functions are in order.
-
-[Unreleased]: https://github.com/dannyvanholten/wp-growl/compare/1.0...HEAD
-[1.0]: https://github.com/dannyvanholten/wp-growl/compare/0.9...1.0
+[Unreleased]: https://github.com/dannyvanholten/wp-growl/compare/0.2...HEAD
+[0.2]: https://github.com/dannyvanholten/wp-growl/compare/0.1...0.2
