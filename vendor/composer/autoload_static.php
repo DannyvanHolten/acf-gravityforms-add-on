@@ -20,11 +20,16 @@ class ComposerStaticInit1c6c6d99b2658709b89f2f20fdab5f9f
         ),
     );
 
+    public static $classMap = array (
+        'acf_field_gravityforms' => __DIR__ . '/../..' . '/resources/acf_field_gravityforms.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit1c6c6d99b2658709b89f2f20fdab5f9f::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit1c6c6d99b2658709b89f2f20fdab5f9f::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit1c6c6d99b2658709b89f2f20fdab5f9f::$classMap;
 
         }, null, ClassLoader::class);
     }
