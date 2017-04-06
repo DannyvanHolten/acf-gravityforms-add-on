@@ -6,13 +6,10 @@ use acf_field;
 
 class Field extends acf_field
 {
-	/**
-	 * acf_field_gravity_forms constructor.
-	 */
 	public function __construct()
 	{
-		$this->name = 'gravityforms-field';
-		$this->label = __('Gravity form', 'gravityforms-acf-field');
+		$this->name = 'form';
+		$this->label = __('Form', 'gravityforms-acf-field');
 		$this->category = __('Relational', 'acf');
 		$this->defaults = [
 			'allow_multiple' => 0,
@@ -24,19 +21,6 @@ class Field extends acf_field
 	}
 
 	/**
-	 * render_field_settings()
-	 *
-	 * Create extra settings for your field. These are visible when editing a field
-	 *
-	 * @type  action
-	 * @since 3.6
-	 * @date  23/01/13
-	 *
-	 * @param $field (array) the $field being edited
-	 * @return  n/a
-	 */
-
-	/**
 	 * Create extra settings for our gravityforms field. These are visible when editing a field.
 	 *
 	 * @param $field
@@ -44,51 +28,39 @@ class Field extends acf_field
 	public function render_field_settings($field)
 	{
 		/**
-		 *  acf_render_field_setting
-		 *
-		 *  This function will create a setting for your field. Simply pass the $field parameter and an array of field settings.
-		 *  The array of settings does not require a `value` or `prefix`; These settings are found from the $field array.
-		 *
-		 *  More than one setting can be added by copy/paste the above code.
-		 *  Please note that you must also have a matching $defaults value for the field name (font_size)
+		 * Render a field setting that will tell us if an empty field is allowed or not.
 		 */
 		acf_render_field_setting($field, [
-			'label'   => 'Allow Null?',
+			'label'   => __('Allow Null?', 'acf'),
 			'type'    => 'radio',
 			'name'    => 'allow_null',
 			'choices' => [
-				1 => __("Yes", 'acf'),
-				0 => __("No", 'acf'),
+				1 => __('Yes', 'acf'),
+				0 => __('No', 'acf'),
 			],
 			'layout'  => 'horizontal'
 		]);
+
+		/**
+		 * Render a field setting that will tell us if multiple forms are allowed
+		 */
 		acf_render_field_setting($field, [
-			'label'   => 'Allow Multiple?',
+			'label'   => __('Allow Multiple?', 'acf'),
 			'type'    => 'radio',
 			'name'    => 'allow_multiple',
 			'choices' => [
-				1 => __("Yes", 'acf'),
-				0 => __("No", 'acf'),
+				1 => __('Yes', 'acf'),
+				0 => __('No', 'acf'),
 			],
 			'layout'  => 'horizontal'
 		]);
 	}
 
 	/**
-	 *  render_field()
+	 * Render our Gravity Form field with all the forms as options
 	 *
-	 *  Create the HTML interface for your field
-	 *
-	 * @param $field (array) the $field being rendered
-	 *
-	 * @type  action
-	 * @since 3.6
-	 * @date  23/01/13
-	 *
-	 * @param $field (array) the $field being edited
-	 * @return  n/a
+	 * @param $field
 	 */
-
 	public function render_field($field)
 	{
 

@@ -4,33 +4,34 @@ namespace ACFGravityforms;
 
 use acf_field;
 
-class DeprecatedField extends acf_field
+class FieldForV4 extends acf_field
 {
-	// vars
-	var $settings, // will hold info such as dir / path
-		$defaults; // will hold default field options
+	/**
+	 * will hold info such as dir / path
+	 *
+	 * @var $settings
+	 */
+	public $settings;
 
-	/*
-	*  __construct
-	*
-	*  Set name / label needed for actions / filters
-	*
-	*  @since	3.6
-	*  @date	23/01/13
-	*/
+	/**
+	 * will hold default field options
+	 *
+	 * @var array
+	 */
+	public $defaults;
 
-	function __construct()
+	public function __construct()
 	{
 		// vars
-		$this->name = 'gravity_forms_field';
-		$this->label = __('Gravity Forms');
-		$this->category = __("Relational",'acf'); // Basic, Content, Choice, etc
-		$this->defaults = array(
+		$this->name = 'form';
+		$this->label = __('Form', 'gravityforms-acf-field');
+		$this->category = __("Relational", 'acf'); // Basic, Content, Choice, etc
+		$this->defaults = [
 			'allow_multiple' => 0,
-			'allow_null' => 0
-		);
+			'allow_null'     => 0
+		];
 
-		// do not delete!
+		// Execute the parent constructor as well
 		parent::__construct();
 	}
 
@@ -48,7 +49,7 @@ class DeprecatedField extends acf_field
 	*  @param	$field	- an array holding all the field's data
 	*/
 
-	function create_options( $field )
+	function create_options($field)
 	{
 		// defaults?
 		$field = array_merge($this->defaults, $field);
@@ -60,44 +61,44 @@ class DeprecatedField extends acf_field
 
 		// Create Field Options HTML
 		?>
-		<tr class="field_option field_option_<?php echo $this->name; ?>">
-			<td class="label">
-				<label><?php _e("Allow Null?",'acf'); ?></label>
-			</td>
-			<td>
+        <tr class="field_option field_option_<?php echo $this->name; ?>">
+            <td class="label">
+                <label><?php _e("Allow Null?", 'acf'); ?></label>
+            </td>
+            <td>
 				<?php
-				do_action('acf/create_field', array(
-					'type'  =>  'radio',
-					'name'  =>  'fields['.$key.'][allow_null]',
-					'value' =>  $field['allow_null'],
-					'choices' =>  array(
-						1 =>  __("Yes",'acf'),
-						0 =>  __("No",'acf'),
-					),
-					'layout'  =>  'horizontal',
-				));
+				do_action('acf/create_field', [
+					'type'    => 'radio',
+					'name'    => 'fields[' . $key . '][allow_null]',
+					'value'   => $field['allow_null'],
+					'choices' => [
+						1 => __("Yes", 'acf'),
+						0 => __("No", 'acf'),
+					],
+					'layout'  => 'horizontal',
+				]);
 				?>
-			</td>
-		</tr>
-		<tr class="field_option field_option_<?php echo $this->name; ?>">
-			<td class="label">
-				<label><?php _e("Select multiple values?",'acf'); ?></label>
-			</td>
-			<td>
+            </td>
+        </tr>
+        <tr class="field_option field_option_<?php echo $this->name; ?>">
+            <td class="label">
+                <label><?php _e("Select multiple values?", 'acf'); ?></label>
+            </td>
+            <td>
 				<?php
-				do_action('acf/create_field', array(
-					'type'  =>  'radio',
-					'name'  =>  'fields['.$key.'][multiple]',
-					'value' =>  $field['multiple'],
-					'choices' =>  array(
-						1 =>  __("Yes",'acf'),
-						0 =>  __("No",'acf'),
-					),
-					'layout'  =>  'horizontal',
-				));
+				do_action('acf/create_field', [
+					'type'    => 'radio',
+					'name'    => 'fields[' . $key . '][multiple]',
+					'value'   => $field['multiple'],
+					'choices' => [
+						1 => __("Yes", 'acf'),
+						0 => __("No", 'acf'),
+					],
+					'layout'  => 'horizontal',
+				]);
 				?>
-			</td>
-		</tr>
+            </td>
+        </tr>
 		<?php
 
 	}
@@ -115,26 +116,24 @@ class DeprecatedField extends acf_field
 	*  @date	23/01/13
 	*/
 
-	function create_field( $field )
+	function create_field($field)
 	{
 		// vars
 		$field = array_merge($this->defaults, $field);
-		$choices = array();
+		$choices = [];
 
 		if (class_exists('RGFormsModel')) {
 
 			$forms = RGFormsModel::get_forms(1);
 
-		}	else {
+		} else {
 			echo "<font style='color:red;font-weight:bold;'>Warning: Gravity Forms is not installed or activated. This field does not function without Gravity Forms!</font>";
 		}
 
 
-		if(isset($forms))
-		{
-			foreach( $forms as $form )
-			{
-				$choices[ $form->id ] = ucfirst($form->title);
+		if (isset($forms)) {
+			foreach ($forms as $form) {
+				$choices[$form->id] = ucfirst($form->title);
 			}
 		}
 
@@ -162,41 +161,41 @@ class DeprecatedField extends acf_field
 	*  @return	$value	- the modified value
 	*/
 
-	function format_value_for_api( $value, $field )
+	function format_value_for_api($value, $field)
 	{
 
 		//Return false if value is false, null or empty
-		if( !$value || empty($value) ){
+		if (!$value || empty($value)) {
 			return false;
 		}
 
 		//If there are multiple forms, construct and return an array of form objects
-		if( is_array($value) && !empty($value) ){
+		if (is_array($value) && !empty($value)) {
 
-			$form_objects = array();
-			foreach($value as $k => $v){
-				$form = GFAPI::get_form( $v );
+			$form_objects = [];
+			foreach ($value as $k => $v) {
+				$form = GFAPI::get_form($v);
 				//Add it if it's not an error object
-				if( !is_wp_error($form) ){
+				if (!is_wp_error($form)) {
 					$form_objects[$k] = $form;
 				}
 			}
 			//Return false if the array is empty
-			if( !empty($form_objects) ){
+			if (!empty($form_objects)) {
 				return $form_objects;
-			}else{
+			} else {
 				return false;
 			}
 
 
 			//Else return single form object
-		}else{
+		} else {
 
 			$form = GFAPI::get_form(intval($value));
 			//Return the form object if it's not an error object. Otherwise return false.
-			if( !is_wp_error($form) ){
+			if (!is_wp_error($form)) {
 				return $form;
-			}else{
+			} else {
 				return false;
 			}
 
