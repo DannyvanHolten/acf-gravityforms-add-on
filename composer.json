@@ -1,6 +1,6 @@
 {
   "name": "dannyvanholten/gravityforms-acf-field",
-  "description": "Advanced Custom Field to select a Gravity Form",
+  "description": "Advanced Custom Fields: Gravityforms Add-on",
   "type": "wordpress-plugin",
   "license": "GPL-3.0+",
   "authors": [
