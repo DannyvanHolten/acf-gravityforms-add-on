@@ -9,39 +9,42 @@ Author URI: http://www.dannyvanholten.com/
 Copyright: Danny van Holten
 */
 
-// $version = 5 and can be ignored until ACF6 exists
-function include_field_types_Gravity_Forms( $version ) {
+if (!defined('ABSPATH')) {
+	exit;
+} // Exit if accessed directly
 
-  include_once('gravity_forms-v5.php');
+// Define multiple necessary constants
+define('GF_ACF_FIELD_VERSION', 1.0);
+define('GF_ACF_FIELD_TEXTDOMAIN', 'wp-growl-notifications');
+define('GF_ACF_FIELD_LANGUAGES', dirname(plugin_basename(__FILE__)) . '/languages/');
 
-}
+define('GF_ACF_FIELD_ASSETS', plugin_dir_url(__FILE__));
+define('GF_ACF_FIELD_RESOURCES', __DIR__ . '/resources/');
 
-add_action('acf/include_field_types', 'include_field_types_gravity_forms'); 
+// Use composer to autoload our classes
+require_once __DIR__ . '/vendor/autoload.php';
 
+// Initiate the field!
+new acf_field_gravityforms();
+add_action('acf/include_field_types', 'include_field_types_gravityforms');
 
-function register_fields_Gravity_Forms() {
-  include_once('gravity_forms-v4.php');
-}
-
-add_action('acf/register_fields', 'register_fields_gravity_forms');
 
 //Added to check if Gravity Forms is installed on activation.
 function gff_activate() {
 
     if (class_exists('RGFormsModel')) {
-			
+
 			return true;
-			
+
 		}	else {
-			
-			$html = '<div class="error">';
+
+			$html = '<div class="notice notice-error">';
 				$html .= '<p>';
-					$html .= _e( 'Warning: Gravity Forms is not installed or activated. This plugin does not function without Gravity Forms!' );
+					$html .= __( 'Warning: Gravity Forms is not installed or activated. This plugin does not function without Gravity Forms!', 'gravityforms-acf-field' );
 				$html .= '</p>';
 			$html .= '</div>';
 			echo $html;
-			
+
 		}
 }
 register_activation_hook( __FILE__, 'gff_activate' );
-?>

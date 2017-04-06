@@ -1,39 +1,28 @@
 <?php
 
-class acf_field_gravity_forms extends acf_field
+class acf_field_gravityforms extends acf_field
 {
 	/**
-	 *  __construct
-	 *
-	 *  This function will setup the field type data
-	 *
-	 * @type  function
-	 * @date  5/03/2014
-	 * @since 5.0.0
-	 *
-	 * @param n /a
-	 * @return  n/a
+	 * acf_field_gravity_forms constructor.
 	 */
-
 	public function __construct()
 	{
-		// vars
-		$this->name = 'gravity_forms_field';
-		$this->label = __('Gravity Forms');
-		$this->category = __("Relational", 'acf'); // Basic, Content, Choice, etc
+		$this->name = 'gravityforms-field';
+		$this->label = __('Gravity form', 'gravityforms-acf-field');
+		$this->category = __('Relational', 'acf');
 		$this->defaults = [
 			'allow_multiple' => 0,
 			'allow_null'     => 0
 		];
-		// do not delete!
+
+		// Execute the parent constructor as well
 		parent::__construct();
 	}
 
-
 	/**
-	 *  render_field_settings()
+	 * render_field_settings()
 	 *
-	 *  Create extra settings for your field. These are visible when editing a field
+	 * Create extra settings for your field. These are visible when editing a field
 	 *
 	 * @type  action
 	 * @since 3.6
@@ -43,9 +32,13 @@ class acf_field_gravity_forms extends acf_field
 	 * @return  n/a
 	 */
 
+	/**
+     * Create extra settings for our gravityforms field. These are visible when editing a field.
+     *
+	 * @param $field
+	 */
 	public function render_field_settings($field)
 	{
-
 		/**
 		 *  acf_render_field_setting
 		 *
@@ -55,7 +48,6 @@ class acf_field_gravity_forms extends acf_field
 		 *  More than one setting can be added by copy/paste the above code.
 		 *  Please note that you must also have a matching $defaults value for the field name (font_size)
 		 */
-
 		acf_render_field_setting($field, [
 			'label'   => 'Allow Null?',
 			'type'    => 'radio',
@@ -196,7 +188,7 @@ class acf_field_gravity_forms extends acf_field
 		} else {
 
 			$form = GFAPI::get_form(intval($value));
-			//Return the form object if it's not an error object. Otherwise return false. 
+			//Return the form object if it's not an error object. Otherwise return false.
 			if (!is_wp_error($form)) {
 				return $form;
 			} else {
@@ -208,6 +200,3 @@ class acf_field_gravity_forms extends acf_field
 	}
 
 }
-
-// create field
-new acf_field_gravity_forms();
