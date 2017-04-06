@@ -16,6 +16,7 @@ class Init
 	{
 		add_action('acf/include_field_types', [$this, 'addField']);
 		add_action('acf/register_fields', [$this, 'addFieldforV4']);
+		add_action('admin_init', [$this, 'loadTextDomain']);
 	}
 
 	/**
@@ -33,5 +34,13 @@ class Init
 	public function addFieldforV4()
 	{
 		new FieldForV4();
+	}
+
+	/**
+	 * Load the gettext plugin textdomain located in our language directory.
+	 */
+	public function loadTextDomain()
+	{
+		load_plugin_textdomain(ACF_GF_FIELD_TEXTDOMAIN, false, ACF_GF_FIELD_LANGUAGES);
 	}
 }

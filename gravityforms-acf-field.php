@@ -14,12 +14,12 @@ if (!defined('ABSPATH')) {
 } // Exit if accessed directly
 
 // Define multiple necessary constants
-define('GF_ACF_FIELD_VERSION', 1.0);
-define('GF_ACF_FIELD_TEXTDOMAIN', 'gravityforms-acf-field');
-define('GF_ACF_FIELD_LANGUAGES', dirname(plugin_basename(__FILE__)) . '/languages/');
+define('ACF_GF_FIELD_VERSION', 1.0);
+define('ACF_GF_FIELD_TEXTDOMAIN', 'gravityforms-acf-field');
+define('ACF_GF_FIELD_LANGUAGES', dirname(plugin_basename(__FILE__)) . '/languages/');
 
-define('GF_ACF_FIELD_ASSETS', plugin_dir_url(__FILE__));
-define('GF_ACF_FIELD_RESOURCES', __DIR__ . '/resources/');
+define('ACF_GF_FIELD_ASSETS', plugin_dir_url(__FILE__));
+define('ACF_GF_FIELD_RESOURCES', __DIR__ . '/resources/');
 
 // Use composer to autoload our classes
 require_once __DIR__ . '/vendor/autoload.php';

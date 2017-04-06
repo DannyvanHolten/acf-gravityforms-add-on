@@ -86,9 +86,9 @@ class Field extends acf_field
 			$forms = RGFormsModel::get_forms(1);
 		} else {
 			$warning = __('Warning: Gravityforms needs to be activated in order to use this field.',
-				'gravityforms-acf-field');
+				ACF_GF_FIELD_TEXTDOMAIN);
 			$button = '<a class="button" href=' . admin_url('plugins.php') . '>' . __('Activate Gravityforms here',
-					'gravityforms-acf-field') . '</a>';
+					ACF_GF_FIELD_TEXTDOMAIN) . '</a>';
 
 			echo '<p style="color:#d54e21;">' . $warning . '</p>' . $button;
 
@@ -108,7 +108,7 @@ class Field extends acf_field
 		// No active forms? Stop and issue a warning.
 		if (empty($choices)) {
 			$warning = __('Warning: There are no active forms. You need to create or activate a form first',
-				'gravityforms-acf-field');
+				ACF_GF_FIELD_TEXTDOMAIN);
 			$button = '<a class="button" href=' . admin_url('admin.php?page=gf_new_form') . '>' . __('Create a New Form',
 					'gravityforms') . '</a>';
 			echo '<p style="color:#d54e21;">' . $warning . '</p>' . $button;
@@ -126,7 +126,7 @@ class Field extends acf_field
 		$html .= '<select id="' . str_replace(['[', ']'], ['-', ''], $field['name']) . '" name="' . $field['name'];
 		$html .= $field['allow_multiple'] ? '[]" multiple="multiple" data-multiple="1">' : '">';
 		$html .= $field['allow_null'] ? '<option value="">' . __('- Select a form -',
-				'gravityforms-acf-field') . '</option>' : '';
+				ACF_GF_FIELD_TEXTDOMAIN) . '</option>' : '';
 
 		// Loop trough all our choices
 		foreach ($field['choices'] as $formId => $formTitle) {
@@ -195,7 +195,7 @@ class Field extends acf_field
 				return (int)$value;
 			}
 
-			if ($field['return_format'] === 'post_object') {
+			if ($field['return_format'] === 'form_object') {
 				$form = GFAPI::get_form($value);
 				//Return the form object if it's not an error object. Otherwise return false.
 				if (!is_wp_error($form)) {

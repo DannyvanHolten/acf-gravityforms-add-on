@@ -112,9 +112,9 @@ class FieldForV4 extends acf_field
 			$forms = RGFormsModel::get_forms(1);
 		} else {
 			$warning = __('Warning: Gravityforms needs to be activated in order to use this field.',
-				'gravityforms-acf-field');
+				ACF_GF_FIELD_TEXTDOMAIN);
 			$button = '<a class="button" href=' . admin_url('plugins.php') . '>' . __('Activate Gravityforms here',
-					'gravityforms-acf-field') . '</a>';
+					ACF_GF_FIELD_TEXTDOMAIN) . '</a>';
 
 			echo '<p style="color:#d54e21;">' . $warning . '</p>' . $button;
 
