@@ -24,8 +24,8 @@ class FieldForV4 extends acf_field
 	{
 		// vars
 		$this->name = 'form';
-		$this->label = __('Form', 'gravityforms-acf-field');
-		$this->category = __("Relational", 'acf'); // Basic, Content, Choice, etc
+		$this->label = __('Forms', 'gravityforms');
+		$this->category = __('Relational', 'acf'); // Basic, Content, Choice, etc
 		$this->defaults = [
 			'allow_multiple' => 0,
 			'allow_null'     => 0
@@ -35,21 +35,12 @@ class FieldForV4 extends acf_field
 		parent::__construct();
 	}
 
-
-	/*
-	*  create_options()
-	*
-	*  Create extra options for your field. This is rendered when editing a field.
-	*  The value of $field['name'] can be used (like bellow) to save extra data to the $field
-	*
-	*  @type	action
-	*  @since	3.6
-	*  @date	23/01/13
-	*
-	*  @param	$field	- an array holding all the field's data
-	*/
-
-	function create_options($field)
+	/**
+	 * Create extra settings for our gravityforms field. These are visible when editing a field.
+	 *
+	 * @param $field
+	 */
+	public function create_options($field)
 	{
 		// defaults?
 		$field = array_merge($this->defaults, $field);
@@ -63,7 +54,7 @@ class FieldForV4 extends acf_field
 		?>
         <tr class="field_option field_option_<?php echo $this->name; ?>">
             <td class="label">
-                <label><?php _e("Allow Null?", 'acf'); ?></label>
+                <label><?php echo __("Allow Null?", 'acf'); ?></label>
             </td>
             <td>
 				<?php
@@ -72,8 +63,8 @@ class FieldForV4 extends acf_field
 					'name'    => 'fields[' . $key . '][allow_null]',
 					'value'   => $field['allow_null'],
 					'choices' => [
-						1 => __("Yes", 'acf'),
-						0 => __("No", 'acf'),
+						1 => __('Yes', 'acf'),
+						0 => __('No', 'acf'),
 					],
 					'layout'  => 'horizontal',
 				]);
@@ -82,7 +73,7 @@ class FieldForV4 extends acf_field
         </tr>
         <tr class="field_option field_option_<?php echo $this->name; ?>">
             <td class="label">
-                <label><?php _e("Select multiple values?", 'acf'); ?></label>
+                <label><?php echo __("Select multiple values?", 'acf'); ?></label>
             </td>
             <td>
 				<?php
@@ -91,8 +82,8 @@ class FieldForV4 extends acf_field
 					'name'    => 'fields[' . $key . '][multiple]',
 					'value'   => $field['multiple'],
 					'choices' => [
-						1 => __("Yes", 'acf'),
-						0 => __("No", 'acf'),
+						1 => __('Yes', 'acf'),
+						0 => __('No', 'acf'),
 					],
 					'layout'  => 'horizontal',
 				]);
@@ -103,104 +94,86 @@ class FieldForV4 extends acf_field
 
 	}
 
-
-	/*
-	*  create_field()
-	*
-	*  Create the HTML interface for your field
-	*
-	*  @param	$field - an array holding all the field's data
-	*
-	*  @type	action
-	*  @since	3.6
-	*  @date	23/01/13
-	*/
-
-	function create_field($field)
+	/**
+	 * Render our Gravity Form field with all the forms as options
+	 *
+	 * @param $field
+	 * @return bool
+	 */
+	public function create_field($field)
 	{
-		// vars
 		$field = array_merge($this->defaults, $field);
 		$choices = [];
+		$multiple = null;
 
+		// Gravityforms not activated? Stop and issue a warning.
 		if (class_exists('RGFormsModel')) {
-
+			// Get all forms
 			$forms = RGFormsModel::get_forms(1);
-
 		} else {
-			echo "<font style='color:red;font-weight:bold;'>Warning: Gravity Forms is not installed or activated. This field does not function without Gravity Forms!</font>";
-		}
+			$warning = __('Warning: Gravityforms needs to be activated in order to use this field.',
+				'gravityforms-acf-field');
+			$button = '<a class="button" href=' . admin_url('plugins.php') . '>' . __('Activate Gravityforms here',
+					'gravityforms-acf-field') . '</a>';
 
+			echo '<p style="color:#d54e21;">' . $warning . '</p>' . $button;
 
-		if (isset($forms)) {
-			foreach ($forms as $form) {
-				$choices[$form->id] = ucfirst($form->title);
-			}
-		}
-
-		// override field settings and render
-		$field['choices'] = $choices;
-		$field['type'] = 'select';
-
-		do_action('acf/create_field', $field);
-	}
-
-
-	/*
-	*  format_value_for_api()
-	*
-	*  This filter is applied to the $value after it is loaded from the db and before it is passed back to the api functions such as the_field
-	*
-	*  @type	filter
-	*  @since	3.6
-	*  @date	23/01/13
-	*
-	*  @param	$value	- the value which was loaded from the database
-	*  @param	$post_id - the $post_id from which the value was loaded
-	*  @param	$field	- the field array holding all the field options
-	*
-	*  @return	$value	- the modified value
-	*/
-
-	function format_value_for_api($value, $field)
-	{
-
-		//Return false if value is false, null or empty
-		if (!$value || empty($value)) {
+			// Don't continue, because we have nothing to show
 			return false;
 		}
 
-		//If there are multiple forms, construct and return an array of form objects
-		if (is_array($value) && !empty($value)) {
-
-			$form_objects = [];
-			foreach ($value as $k => $v) {
-				$form = GFAPI::get_form($v);
-				//Add it if it's not an error object
-				if (!is_wp_error($form)) {
-					$form_objects[$k] = $form;
+		// Check if there are forms and set our choices
+		if (!empty($forms)) {
+			foreach ($forms as $form) {
+				if ((int)$form->is_active === 1) { // === is not possible because it doesn't recognize the type
+					$choices[$form->id] = ucfirst($form->title);
 				}
 			}
-			//Return false if the array is empty
-			if (!empty($form_objects)) {
-				return $form_objects;
-			} else {
-				return false;
+		}
+
+		// Override field settings and start rendering
+		$field['choices'] = $choices;
+		$field['type'] = 'select';
+	}
+
+
+	/**
+	 * Return a form object when not empty
+	 *
+	 * @param $value
+	 * @param $post_id
+	 * @param $field
+	 * @return array|bool
+	 */
+	function format_value_for_api($value, $field)
+	{
+		//If there are multiple forms, construct and return an array of form objects
+		if (!empty($value) && is_array($value)) {
+
+			$form_objects = [];
+			foreach ($value as $key => $formId) {
+				$form = GFAPI::get_form($formId);
+
+				if (!is_wp_error($form)) { // Add it if it's not an error object
+					$form_objects[$key] = $form;
+				}
 			}
 
+			if (!empty($form_objects)) { //Return false if the array is empty
+				return $form_objects;
+			}
 
-			//Else return single form object
-		} else {
+		} elseif (!empty($value)) {  // If not an array return single form object
 
-			$form = GFAPI::get_form(intval($value));
-			//Return the form object if it's not an error object. Otherwise return false.
-			if (!is_wp_error($form)) {
+			$form = GFAPI::get_form($value);
+			if (!is_wp_error($form)) { // Return the form object if it's not an error object. Otherwise return false.
 				return $form;
-			} else {
-				return false;
 			}
 
 		}
 
+		// Return false if value is empty
+		return false;
 	}
 
 }

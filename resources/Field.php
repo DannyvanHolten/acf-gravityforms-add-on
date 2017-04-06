@@ -43,7 +43,7 @@ class Field extends acf_field
 
 		// Render a field setting that will tell us if multiple forms are allowed.
 		acf_render_field_setting($field, [
-			'label'   => __('Allow Multiple?', 'gravityforms-acf-field'),
+			'label'   => __('Select multiple values?', 'acf'),
 			'type'    => 'radio',
 			'name'    => 'allow_multiple',
 			'choices' => [
