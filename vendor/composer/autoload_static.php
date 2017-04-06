@@ -13,7 +13,7 @@ class ComposerStaticInit1c6c6d99b2658709b89f2f20fdab5f9f
         ),
         'A' => 
         array (
-            'ACFGravityforms\\' => 16,
+            'ACFGravityformsField\\' => 21,
         ),
     );
 
@@ -22,7 +22,7 @@ class ComposerStaticInit1c6c6d99b2658709b89f2f20fdab5f9f
         array (
             0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
         ),
-        'ACFGravityforms\\' => 
+        'ACFGravityformsField\\' => 
         array (
             0 => __DIR__ . '/../..' . '/resources',
         ),
