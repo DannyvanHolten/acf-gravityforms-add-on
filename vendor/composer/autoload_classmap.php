@@ -6,5 +6,4 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'acf_field_gravityforms' => $baseDir . '/resources/acf_field_gravityforms.php',
 );
