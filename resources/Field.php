@@ -38,7 +38,7 @@ class Field extends acf_field
 			'name'         => 'return_format',
 			'layout'       => 'horizontal',
 			'choices'      => [
-				'form_object' => __('Post Object', 'acf'),
+				'post_object' => __('Post Object', 'acf'),
 				'id'          => __('Post ID', 'acf')
 			],
 		]);
