@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
 
 // Define multiple necessary constants
 define('GF_ACF_FIELD_VERSION', 1.0);
-define('GF_ACF_FIELD_TEXTDOMAIN', 'wp-growl-notifications');
+define('GF_ACF_FIELD_TEXTDOMAIN', 'gravityforms-acf-field');
 define('GF_ACF_FIELD_LANGUAGES', dirname(plugin_basename(__FILE__)) . '/languages/');
 
 define('GF_ACF_FIELD_ASSETS', plugin_dir_url(__FILE__));
