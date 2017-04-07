@@ -1,4 +1,4 @@
-=== WP Growl ===
+=== Advanced Custom Fields: Gravityforms Add-on ===
 Contributors: DannyvanHolten
 Donate link: http://www.dannyvanholten.com/
 Tags: gravityforms, gravity form, forms, form, acf, advanced custom fields, fields, custom fields
