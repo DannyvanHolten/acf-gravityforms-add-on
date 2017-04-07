@@ -5,7 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [1.0] - 2017-04-08
 ### Added
+* Changed names because of release on WordPress
 * Documentation for WordPress
 
 ## [0.2] - 2017-04-07
@@ -16,5 +19,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 * The repo is set up 
 
-[Unreleased]: https://github.com/dannyvanholten/wp-growl/compare/0.2...HEAD
-[0.2]: https://github.com/dannyvanholten/wp-growl/compare/0.1...0.2
+[Unreleased]: https://github.com/dannyvanholten/acf-gravityforms-add-on/compare/0.2...HEAD
+[0.2]: https://github.com/dannyvanholten/acf-gravityforms-add-on/compare/0.1...0.2
