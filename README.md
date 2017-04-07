@@ -39,7 +39,7 @@ $form = get_field('my-form');
 gravity_form($form['id'], true, true, false, '', true, 1); 
 ```
 
-### If you return multiple Form ID's
+#### If you return multiple Form ID's
 ```
 $forms = get_field('my-form');
 
