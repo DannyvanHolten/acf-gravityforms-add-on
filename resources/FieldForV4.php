@@ -148,17 +148,17 @@ class FieldForV4 extends acf_field
     {
         //If there are multiple forms, construct and return an array of form objects
         if (!empty($value) && is_array($value)) {
-            $form_objects = [];
+            $formObjects = [];
             foreach ($value as $key => $formId) {
                 $form = GFAPI::get_form($formId);
 
                 if (!is_wp_error($form)) { // Add it if it's not an error object
-                    $form_objects[$key] = $form;
+                    $formObjects[$key] = $form;
                 }
             }
 
-            if (!empty($form_objects)) { //Return false if the array is empty
-                return $form_objects;
+            if (!empty($formObjects)) { //Return false if the array is empty
+                return $formObjects;
             }
         } elseif (!empty($value)) {  // If not an array return single form object
 
