@@ -41,6 +41,15 @@ or if you make use of WPackagist
 
 == Changelog ==
 
+= 1.0.1 =
+### Fixed
+* Fixed a bug not causing the multiple option to render in ACF V4
+
+= 1.0 =
+### Added
+* Changed names because of release on WordPress
+* Documentation for WordPress
+
 = 0.2 =
 ### Changed
 * Refactor the entire repo. Doesn't look the same at all anymore
