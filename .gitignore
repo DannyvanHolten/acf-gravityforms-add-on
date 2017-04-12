@@ -4,5 +4,7 @@ vendor/*
 !vendor/autoload.php
 !vendor/composer
 vendor/composer/*
+vendor/composer/LICENSE
+vendor/composer/installed.json
 !vendor/composer/autoload*
 !vendor/composer/ClassLoader.php
