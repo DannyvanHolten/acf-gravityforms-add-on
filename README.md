@@ -61,4 +61,4 @@ As Gravityforms & Advanced Custom Fields are continuously in development we like
 
 ## Credits
 
-I want to thank [@stormuk](https://github.com/stormuk/Gravity-Forms-ACF-Field) (@lgladdy & @adampope) for initally creating this plug-in. Be sure to follow them!
+I want to thank [@stormuk](https://github.com/stormuk/Gravity-Forms-ACF-Field) ([@lgladdy](https://github.com/lgladdy) & [@adampope](https://github.com/adampope)) for initally creating this plug-in. Be sure to follow them!
