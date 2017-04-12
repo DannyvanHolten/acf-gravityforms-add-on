@@ -26,24 +26,3 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 // Initiate the field!
 new ACFGravityformsField\Init();
-
-
-////Added to check if Gravity Forms is installed on activation.
-//function gff_activate() {
-//
-//    if (class_exists('RGFormsModel')) {
-//
-//			return true;
-//
-//		}	else {
-//
-//			$html = '<div class="notice notice-error">';
-//				$html .= '<p>';
-//					$html .= __( 'Warning: Gravity Forms is not installed or activated. This plugin does not function without Gravity Forms!', 'gravityforms-acf-field' );
-//				$html .= '</p>';
-//			$html .= '</div>';
-//			echo $html;
-//
-//		}
-//}
-//register_activation_hook( __FILE__, 'gff_activate' );

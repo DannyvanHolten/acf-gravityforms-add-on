@@ -17,6 +17,8 @@ class Init
 		add_action('acf/include_field_types', [$this, 'addField']);
 		add_action('acf/register_fields', [$this, 'addFieldforV4']);
 		add_action('admin_init', [$this, 'loadTextDomain']);
+		add_action('activate_acf-gravityforms-add-on/acf-gravityforms-add-on.php', [$this, 'isGravityFormsActive']);
+		add_action('activate_acf-gravityforms-add-on/acf-gravityforms-add-on.php', [$this, 'isAdvancedCustomFieldsActive']);
 	}
 
 	/**
@@ -34,6 +36,33 @@ class Init
 	public function addFieldforV4()
 	{
 		new FieldForV4();
+	}
+
+	/**
+	 * Check if gravityforms is active. If not, issue a notice
+	 */
+	public function isGravityFormsActive()
+	{
+		if (!function_exists('gravity_form')) {
+			echo '<div class="notice notice-warning"><p>
+					' . __('Warning: Gravityforms needs to be activated in order to use the Advanced Custom Fields: Gravityforms Add-on.',
+					'gravityforms-acf-field') . '
+					</p></div>';
+		}
+	}
+
+
+	/**
+	 * Check if gravityforms is active. If not, issue a notice
+	 */
+	public function isAdvancedCustomFieldsActive()
+	{
+		if (!function_exists('get_field')) {
+			echo '<div class="notice notice-warning"><p>
+					' . __('Warning: Advanced Custom Fields needs to be activated in order to use the Advanced Custom Fields: Gravityforms Add-on.',
+					'gravityforms-acf-field') . '
+					</p></div>';
+		}
 	}
 
 	/**
