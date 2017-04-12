@@ -78,7 +78,6 @@ class Field extends acf_field
 	{
 		$field = array_merge($this->defaults, $field);
 		$choices = [];
-		$multiple = null;
 
 		// Gravityforms not activated? Stop and issue a warning.
 		if (class_exists('RGFormsModel')) {
@@ -122,9 +121,9 @@ class Field extends acf_field
 		$field['type'] = 'select';
 
 		// Start building the html for our field
-		$html = $field['allow_multiple'] ? '<input type="hidden" name="{$field[\'name\']}">' : '';
+		$html = $field['multiple'] ? '<input type="hidden" name="{$field[\'name\']}">' : '';
 		$html .= '<select id="' . str_replace(['[', ']'], ['-', ''], $field['name']) . '" name="' . $field['name'];
-		$html .= $field['allow_multiple'] ? '[]" multiple="multiple" data-multiple="1">' : '">';
+		$html .= $field['multiple'] ? '[]" multiple="multiple" data-multiple="1">' : '">';
 		$html .= $field['allow_null'] ? '<option value="">' . __('- Select a form -',
 				ACF_GF_FIELD_TEXTDOMAIN) . '</option>' : '';
 
