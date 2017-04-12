@@ -39,6 +39,11 @@ or if you make use of WPackagist
 
 == Screenshots ==
 
+1. You can select Form as a field type while adding an ACF Field.
+2. The actual selection of the field
+3. You can select all your Gravity forms
+4. If ACF or Gravityforms is not added it will give a notice (Notices from [WP Growl Notifications](https://wordpress.org/plugins/wp-growl-notifications)
+
 == Changelog ==
 
 
