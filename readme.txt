@@ -41,6 +41,11 @@ or if you make use of WPackagist
 
 == Changelog ==
 
+
+= 1.1 =
+### Added
+* Added admin notices to check if ACF & Gravityforms are active
+
 = 1.0.1 =
 ### Fixed
 * Fixed a bug not causing the multiple option to render in ACF V4

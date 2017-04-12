@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 ## [1.1] - 2017-04-12
+### Added
 * Added admin notices to check if ACF & Gravityforms are active
 
 ## [1.0.1] - 2017-04-12
