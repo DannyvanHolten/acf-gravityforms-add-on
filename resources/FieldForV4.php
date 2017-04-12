@@ -3,6 +3,8 @@
 namespace ACFGravityformsField;
 
 use acf_field;
+use RGFormsModel;
+use GFAPI;
 
 class FieldForV4 extends acf_field
 {
@@ -46,10 +48,8 @@ class FieldForV4 extends acf_field
         // defaults?
         $field = array_merge($this->defaults, $field);
 
-
         // key is needed in the field names to correctly save the data
         $key = $field['name'];
-
 
         // Create Field Options HTML
         ?>
@@ -104,7 +104,6 @@ class FieldForV4 extends acf_field
     {
         $field = array_merge($this->defaults, $field);
         $choices = [];
-        $multiple = null;
 
         // Gravityforms not activated? Stop and issue a warning.
         if (class_exists('RGFormsModel')) {
@@ -145,7 +144,7 @@ class FieldForV4 extends acf_field
      * @param $field
      * @return array|bool
      */
-    public function format_value_for_api($value, $field)
+    public function format_value_for_api($value)
     {
         //If there are multiple forms, construct and return an array of form objects
         if (!empty($value) && is_array($value)) {
