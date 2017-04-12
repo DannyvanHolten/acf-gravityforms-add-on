@@ -58,3 +58,7 @@ As Gravityforms & Advanced Custom Fields are continuously in development we like
 
 - [x] Add dutch translations
 - [ ] Create an admin notice when plug-in gets activated but Gravityforms is not activated yet
+
+## Credits
+
+I want to thank [@stormuk](https://github.com/stormuk/Gravity-Forms-ACF-Field) (@lgladdy & @adampope) for initally creating this plug-in. Be sure to follow them!
