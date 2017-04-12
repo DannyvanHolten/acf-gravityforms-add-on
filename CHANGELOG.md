@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.0.1] - 2017-04-12
+* Fixed a bug not causing the multiple option to render in ACF V4
+
 ## [1.0] - 2017-04-08
 ### Added
 * Changed names because of release on WordPress
