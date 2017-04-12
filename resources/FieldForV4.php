@@ -27,7 +27,8 @@ class FieldForV4 extends acf_field
 		$this->label = __('Forms', 'gravityforms');
 		$this->category = __('Relational', 'acf'); // Basic, Content, Choice, etc
 		$this->defaults = [
-			'allow_multiple' => 0,
+			'return_format'  => 'form_object',
+			'multiple' => 0,
 			'allow_null'     => 0
 		];
 
@@ -54,7 +55,7 @@ class FieldForV4 extends acf_field
 		?>
         <tr class="field_option field_option_<?php echo $this->name; ?>">
             <td class="label">
-                <label><?php echo __("Allow Null?", 'acf'); ?></label>
+                <label><?php echo __('Allow Null?', 'acf'); ?></label>
             </td>
             <td>
 				<?php
@@ -71,9 +72,10 @@ class FieldForV4 extends acf_field
 				?>
             </td>
         </tr>
+
         <tr class="field_option field_option_<?php echo $this->name; ?>">
             <td class="label">
-                <label><?php echo __("Select multiple values?", 'acf'); ?></label>
+                <label><?php echo __('Select multiple values?', 'acf'); ?></label>
             </td>
             <td>
 				<?php
@@ -91,7 +93,6 @@ class FieldForV4 extends acf_field
             </td>
         </tr>
 		<?php
-
 	}
 
 	/**

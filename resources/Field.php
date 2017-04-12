@@ -15,7 +15,7 @@ class Field extends acf_field
 		$this->category = __('Relational', 'acf');
 		$this->defaults = [
 			'return_format'  => 'form_object',
-			'allow_multiple' => 0,
+			'multiple' => 0,
 			'allow_null'     => 0
 		];
 
@@ -59,7 +59,7 @@ class Field extends acf_field
 		acf_render_field_setting($field, [
 			'label'   => __('Select multiple values?', 'acf'),
 			'type'    => 'radio',
-			'name'    => 'allow_multiple',
+			'name'    => 'multiple',
 			'choices' => [
 				1 => __('Yes', 'acf'),
 				0 => __('No', 'acf'),
