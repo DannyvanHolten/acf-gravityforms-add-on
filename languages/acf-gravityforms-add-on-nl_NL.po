@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"POT-Creation-Date: 2017-04-07 00:37+0200\n"
-"PO-Revision-Date: 2017-04-07 00:39+0200\n"
+"Project-Id-Version: acf-gravityforms-addon\n"
+"POT-Creation-Date: 2017-04-12 22:07+0200\n"
+"PO-Revision-Date: 2017-04-12 22:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -20,50 +20,12 @@ msgstr ""
 msgid "Forms"
 msgstr "Formulieren"
 
-#: resources/Field.php:15 resources/FieldForV4.php:28
-msgid "Relational"
-msgstr ""
-
-#: resources/Field.php:35
-msgid "Return Value"
-msgstr ""
-
-#: resources/Field.php:36
-msgid "Specify the returned value on front end"
-msgstr ""
-
-#: resources/Field.php:41
-msgid "Post Object"
-msgstr ""
-
-#: resources/Field.php:42
-msgid "Post ID"
-msgstr ""
-
-#: resources/Field.php:48 resources/FieldForV4.php:57
-msgid "Allow Null?"
-msgstr ""
-
-#: resources/Field.php:52 resources/Field.php:64 resources/FieldForV4.php:66
-#: resources/FieldForV4.php:85
-msgid "Yes"
-msgstr ""
-
-#: resources/Field.php:53 resources/Field.php:65 resources/FieldForV4.php:67
-#: resources/FieldForV4.php:86
-msgid "No"
-msgstr ""
-
-#: resources/Field.php:60 resources/FieldForV4.php:76
-msgid "Select multiple values?"
-msgstr ""
-
-#: resources/Field.php:88 resources/FieldForV4.php:114
+#: resources/Field.php:88 resources/FieldForV4.php:115
 msgid "Warning: Gravityforms needs to be activated in order to use this field."
 msgstr ""
 "Let op: Gravityforms moet geactiveerd zijn om dit veld te kunnen gebruiken"
 
-#: resources/Field.php:90 resources/FieldForV4.php:116
+#: resources/Field.php:90 resources/FieldForV4.php:117
 msgid "Activate Gravityforms here"
 msgstr "Activeer Gravityforms hier"
 
@@ -82,3 +44,19 @@ msgstr ""
 #: resources/Field.php:128
 msgid "- Select a form -"
 msgstr "- Selecteer een formulier"
+
+#: resources/Init.php:48
+msgid ""
+"Warning: Gravityforms needs to be activated in order to use the Advanced "
+"Custom Fields: Gravityforms Add-on."
+msgstr ""
+"Let op: Gravityforms moet geactiveerd zijn om Advanced Custom Fields: "
+"Gravityforms Add-on te kunnen gebruiken."
+
+#: resources/Init.php:62
+msgid ""
+"Warning: Advanced Custom Fields needs to be activated in order to use the "
+"Advanced Custom Fields: Gravityforms Add-on."
+msgstr ""
+"Let op: Advanced Custom Fields moet geactiveerd zijn om Advanced Custom "
+"Fields: Gravityforms Add-on te kunnen gebruiken."
