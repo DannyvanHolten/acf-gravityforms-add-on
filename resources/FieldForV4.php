@@ -106,10 +106,7 @@ class FieldForV4 extends acf_field
         $choices = [];
 
         // Gravityforms not activated? Stop and issue a warning.
-        if (class_exists('RGFormsModel')) {
-            // Get all forms
-            $forms = RGFormsModel::get_forms(1);
-        } else {
+        if (!class_exists('RGFormsModel')) {
             $warning = __('Warning: Gravityforms needs to be activated in order to use this field.',
                 ACF_GF_FIELD_TEXTDOMAIN);
             $button = '<a class="button" href=' . admin_url('plugins.php') . '>' . __('Activate Gravityforms here',
@@ -120,6 +117,9 @@ class FieldForV4 extends acf_field
             // Don't continue, because we have nothing to show
             return false;
         }
+
+		// Get all forms
+		$forms = RGFormsModel::get_forms(1);
 
         // Check if there are forms and set our choices
         if (!empty($forms)) {
