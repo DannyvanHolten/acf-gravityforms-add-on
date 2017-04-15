@@ -148,9 +148,9 @@ class Field extends acf_field
 	 * @param $field
 	 * @return array|bool
 	 */
-	public function format_value($value, $post_id, $field)
+	public function format_value($value, $postId, $field)
 	{
-		return $this->process_value($value, $field);
+		return $this->processValue($value, $field);
 	}
 
 	/**
@@ -160,21 +160,21 @@ class Field extends acf_field
 	 * @param $field
 	 * @return array|bool|int
 	 */
-	private function process_value($value, $field)
+	private function processValue($value, $field)
 	{
 		if (is_array($value)) {
-			$form_objects = [];
+			$formObjects = [];
 			foreach ($value as $key => $formId) {
-				$form = $this->process_value($formId, $field);
+				$form = $this->processValue($formId, $field);
 				//Add it if it's not an error object
 				if ($form) {
-					$form_objects[$key] = $form;
+					$formObjects[$key] = $form;
 				}
 			}
 
 			// Return the form object
-			if (!empty($form_objects)) {
-				return $form_objects;
+			if (!empty($formObjects)) {
+				return $formObjects;
 			}
 
 			// Else return false
