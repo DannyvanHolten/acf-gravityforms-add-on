@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.1.1] - 2017-04-15
+### Added
+* Fixed the preselecting of values because of a typehinting bug.
+
 ## [1.1] - 2017-04-12
 ### Added
 * Added admin notices to check if ACF & Gravityforms are active
