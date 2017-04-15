@@ -173,34 +173,36 @@ class Field extends acf_field
 				}
 			}
 
-			//Return false if the array is empty
+			// Return the form object
 			if (!empty($form_objects)) {
 				return $form_objects;
-			} else {
-				return false;
-			}
-		} else {
-			if (!is_array($field)) {
-				$field = [];
 			}
 
-			if (empty($field['return_format'])) {
-				$field['return_format'] = 'post_object';
-			}
-
-			if ($field['return_format'] === 'id') {
-				return (int)$value;
-			}
-
-			if ($field['return_format'] === 'form_object') {
-				$form = GFAPI::get_form($value);
-				//Return the form object if it's not an error object. Otherwise return false.
-				if (!is_wp_error($form)) {
-					return $form;
-				}
-			}
-
+			// Else return false
 			return false;
 		}
+
+		// Else
+		if (!is_array($field)) {
+			$field = [];
+		}
+
+		if (empty($field['return_format'])) {
+			$field['return_format'] = 'post_object';
+		}
+
+		if ($field['return_format'] === 'id') {
+			return (int)$value;
+		}
+
+		if ($field['return_format'] === 'form_object') {
+			$form = GFAPI::get_form($value);
+			//Return the form object if it's not an error object. Otherwise return false.
+			if (!is_wp_error($form)) {
+				return $form;
+			}
+		}
+
+		return false;
 	}
 }
