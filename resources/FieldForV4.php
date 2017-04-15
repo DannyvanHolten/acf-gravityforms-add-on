@@ -3,7 +3,6 @@
 namespace ACFGravityformsField;
 
 use acf_field;
-use RGFormsModel;
 use GFAPI;
 
 class FieldForV4 extends acf_field
@@ -106,7 +105,7 @@ class FieldForV4 extends acf_field
         $choices = [];
 
         // Gravityforms not activated? Stop and issue a warning.
-        if (!class_exists('RGFormsModel')) {
+        if (!class_exists('GFAPI')) {
             $warning = __('Warning: Gravityforms needs to be activated in order to use this field.',
                 ACF_GF_FIELD_TEXTDOMAIN);
             $button = '<a class="button" href=' . admin_url('plugins.php') . '>' . __('Activate Gravityforms here',
@@ -119,7 +118,7 @@ class FieldForV4 extends acf_field
         }
 
 		// Get all forms
-		$forms = RGFormsModel::get_forms(1);
+		$forms = GFAPI::get_forms();
 
         // Check if there are forms and set our choices
         if (!empty($forms)) {
