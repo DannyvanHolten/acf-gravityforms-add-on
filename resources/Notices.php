@@ -26,6 +26,7 @@ class Notices
     public function isGravityFormsActive($inline = false, $alt = false)
     {
         if (!class_exists('GFAPI')) {
+            // @todo: actually get the activation hook going with ajax
             $notice = sprintf(__('Warning: You need to <a href="%s">Activate Gravityforms</a> in order to use the Advanced Custom Fields: Gravityforms Add-on.',
                 ACF_GF_FIELD_TEXTDOMAIN), admin_url('admin.php?page=gf_new_form'));
 
@@ -47,13 +48,14 @@ class Notices
     /**
      * Check if gravityforms is active. If not, issue a notice
      */
-    public function isAdvancedCustomFieldsActive()
+    public function isAdvancedCustomFieldsActive($inline = false, $alt = false)
     {
         if (!function_exists('get_field')) {
+            // @todo: actually get the activation hook going with ajax
             $notice = __('Warning: Advanced Custom Fields needs to be activated in order to use the Advanced Custom Fields: Gravityforms Add-on.',
                 ACF_GF_FIELD_TEXTDOMAIN);
 
-            $this->createNotice($notice);
+            $this->createNotice($notice, $inline, $alt);
         }
     }
 

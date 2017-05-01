@@ -7,6 +7,8 @@ use GFAPI;
 
 class Field extends acf_field
 {
+    public $notices;
+
     public function __construct()
     {
         $this->name = 'forms';
@@ -17,6 +19,9 @@ class Field extends acf_field
             'multiple'      => 0,
             'allow_null'    => 0
         ];
+
+        // Get our notices up and running
+        $this->notices = new Notices();
 
         // Execute the parent constructor as well
         parent::__construct();
@@ -76,10 +81,11 @@ class Field extends acf_field
     public function render_field($field)
     {
         // Give a notice if Gravityforms is not active
-        Notices::isGravityformsActive(true, true);
 
         // Stop if Gravityforms is not active
         if (!class_exists('GFAPI')) {
+            $this->notices->isGravityformsActive(true, true);
+
             return false;
         }
 
@@ -91,7 +97,7 @@ class Field extends acf_field
 
         // Check if there are forms and set our choices
         if (empty($forms)) {
-            Notices::isGravityformsActive(true, true);
+            $this->notices->hasActiveGravityForms(true, true);
 
             return false;
         }
