@@ -1,6 +1,6 @@
 <?php
 
-namespace ACFGravityformsAddOn;
+namespace ACFGravityformsField;
 
 use acf_field;
 use GFAPI;
@@ -75,22 +75,23 @@ class Field extends acf_field
      */
     public function render_field($field)
     {
-        $field = array_merge($this->defaults, $field);
-        $choices = [];
+        // Give a notice if Gravityforms is not active
+        Notices::isGravityformsActive(true, true);
 
-        // Gravityforms not activated? Stop and issue a warning.
+        // Stop if Gravityforms is not active
         if (!class_exists('GFAPI')) {
-            Notices::isGravityFormsActive();
-
             return false;
         }
+
+        $field = array_merge($this->defaults, $field);
+        $choices = [];
 
         // Get all forms
         $forms = GFAPI::get_forms();
 
         // Check if there are forms and set our choices
         if (empty($forms)) {
-            Notices::hasActiveGravityForm();
+            Notices::isGravityformsActive(true, true);
 
             return false;
         }
@@ -114,7 +115,7 @@ class Field extends acf_field
         foreach ($field['choices'] as $formId => $formTitle) {
             $html .= '<option value="' . $formId . '"';
             $html .= (is_array($field['value']) && in_array($formId, $field['value'],
-                    false)) || (int)$field['value'] === (int)$formId ? ' selected' : '';
+                    false)) || $field['value'] === $formId ? ' selected="selected"' : '';
             $html .= '>' . $formTitle . '</option>';
         }
 

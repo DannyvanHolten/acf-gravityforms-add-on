@@ -1,12 +1,13 @@
 <?php
 
-namespace ACFGravityformsAddOn;
+namespace ACFGravityformsField;
 
 class Init
 {
     public function __construct()
     {
         $this->addHooks();
+        $this->addNotices();
     }
 
     /**
@@ -17,8 +18,14 @@ class Init
         add_action('acf/include_field_types', [$this, 'addField']);
         add_action('acf/register_fields', [$this, 'addFieldforV4']);
         add_action('admin_init', [$this, 'loadTextDomain']);
-        add_action('admin_notices', ['Notices', 'isGravityFormsActive']);
-        add_action('admin_notices', ['Notices', 'isAdvancedCustomFieldsActive']);
+    }
+
+    /**
+     * Initialize the notices
+     */
+    private function addNotices()
+    {
+        new Notices();
     }
 
     /**

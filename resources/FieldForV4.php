@@ -1,6 +1,6 @@
 <?php
 
-namespace ACFGravityformsAddOn;
+namespace ACFGravityformsField;
 
 use acf_field;
 use GFAPI;
