@@ -3,11 +3,12 @@
 namespace ACFGravityformsField;
 
 use acf_field;
-use RGFormsModel;
 use GFAPI;
 
 class Field extends acf_field
 {
+    public $notices;
+
     public function __construct()
     {
         $this->name = 'forms';
@@ -18,6 +19,9 @@ class Field extends acf_field
             'multiple'      => 0,
             'allow_null'    => 0
         ];
+
+        // Get our notices up and running
+        $this->notices = new Notices();
 
         // Execute the parent constructor as well
         parent::__construct();
@@ -76,69 +80,72 @@ class Field extends acf_field
      */
     public function render_field($field)
     {
+        // Set our defaults
         $field = array_merge($this->defaults, $field);
         $choices = [];
 
-        // Gravityforms not activated? Stop and issue a warning.
-        if (class_exists('RGFormsModel')) {
-            // Get all forms
-            $forms = RGFormsModel::get_forms(1);
-        } else {
-            $warning = __('Warning: Gravityforms needs to be activated in order to use this field.',
-                ACF_GF_FIELD_TEXTDOMAIN);
-            $button = '<a class="button" href=' . admin_url('plugins.php') . '>' . __('Activate Gravityforms here',
-                    ACF_GF_FIELD_TEXTDOMAIN) . '</a>';
+        // Stop if Gravityforms is not active
+        if (!class_exists('GFAPI')) {
+            $this->notices->isGravityformsActive(true, true);
 
-            echo '<p style="color:#d54e21;">' . $warning . '</p>' . $button;
-
-            // Don't continue, because we have nothing to show
             return false;
         }
+
+        // Get all forms
+        $forms = GFAPI::get_forms();
 
         // Check if there are forms and set our choices
-        if (!empty($forms)) {
-            foreach ($forms as $form) {
-                if ((int)$form->is_active === 1) { // === is not possible because it doesn't recognize the type
-                    $choices[$form->id] = ucfirst($form->title);
-                }
-            }
+        if (empty($forms)) {
+            $this->notices->hasActiveGravityForms(true, true);
+
+            return false;
         }
 
-        // No active forms? Stop and issue a warning.
-        if (empty($choices)) {
-            $warning = __('Warning: There are no active forms. You need to create or activate a form first',
-                ACF_GF_FIELD_TEXTDOMAIN);
-            $button = '<a class="button" href=' . admin_url('admin.php?page=gf_new_form') . '>' . __('Create a New Form',
-                    'gravityforms') . '</a>';
-            echo '<p style="color:#d54e21;">' . $warning . '</p>' . $button;
-
-            // Don't continue, because we have nothing to show
-            return false;
+        foreach ($forms as $form) {
+            $choices[$form['id']] = $form['title'];
         }
 
         // Override field settings and start rendering
         $field['choices'] = $choices;
         $field['type'] = 'select';
+        // Create a css id for our field
+        $fieldId = str_replace(['[', ']'], ['-', ''], $field['name']);
 
-        // Start building the html for our field
-        $html = $field['multiple'] ? '<input type="hidden" name="{$field[\'name\']}">' : '';
-        $html .= '<select id="' . str_replace(['[', ']'], ['-', ''], $field['name']) . '" name="' . $field['name'];
-        $html .= $field['multiple'] ? '[]" multiple="multiple" data-multiple="1">' : '">';
-        $html .= $field['allow_null'] ? '<option value="">' . __('- Select a form -',
-                ACF_GF_FIELD_TEXTDOMAIN) . '</option>' : '';
+        // Check if we're allowing multiple selections.
+        $hiddenField = '';
+        $multiple = '';
+        $fieldOptions = '';
+
+        if ($field['multiple']) {
+            $hiddenField = '<input type="hidden" name="{$field[\'name\']}">';
+            $multiple = '[]" multiple="multiple" data-multiple="1';
+        }
+
+        // Check if we're allowing an empty form. If so, create a default option
+        if ($field['allow_null']) {
+            $fieldOptions .= '<option value="">' . __('- Select a form -', ACF_GF_FIELD_TEXTDOMAIN) . '</option>';
+        }
 
         // Loop trough all our choices
         foreach ($field['choices'] as $formId => $formTitle) {
-            $html .= '<option value="' . $formId . '"';
-            $html .= (is_array($field['value']) && in_array($formId, $field['value'],
-                    false)) || (int)$field['value'] === (int)$formId ? ' selected' : '';
-            $html .= '>' . $formTitle . '</option>';
+            $selected = '';
+
+            if ((is_array($field['value']) && in_array($formId, $field['value'], false))
+                || (int)$field['value'] === (int)$formId
+            ) {
+                $selected = ' selected';
+            }
+
+            $fieldOptions .= '<option value="' . $formId . '"' . $selected . '>' . $formTitle . '</option>';
         }
 
-        // Close the field
-        $html .= '</select>';
+        // Start building the html for our field
+        $fieldHhtml = $hiddenField;
+        $fieldHhtml .= '<select id="' . $fieldId . '" name="' . $field['name'] . $multiple . '">';
+        $fieldHhtml .= $fieldOptions;
+        $fieldHhtml .= '</select>';
 
-        echo $html;
+        return $fieldHhtml;
     }
 
     /**
@@ -149,9 +156,9 @@ class Field extends acf_field
      * @param $field
      * @return array|bool
      */
-    public function format_value($value, $post_id, $field)
+    public function format_value($value, $field)
     {
-        return $this->process_value($value, $field);
+        return $this->processValue($value, $field);
     }
 
     /**
@@ -161,48 +168,48 @@ class Field extends acf_field
      * @param $field
      * @return array|bool|int
      */
-    private function process_value($value, $field)
+    private function processValue($value, $field)
     {
         if (is_array($value)) {
-
-            $form_objects = [];
+            $formObjects = [];
             foreach ($value as $key => $formId) {
-                $form = $this->process_value($formId, $field);
+                $form = $this->processValue($formId, $field);
                 //Add it if it's not an error object
                 if ($form) {
-                    $form_objects[$key] = $form;
+                    $formObjects[$key] = $form;
                 }
             }
 
-            //Return false if the array is empty
-            if (!empty($form_objects)) {
-                return $form_objects;
-            } else {
-                return false;
+            // Return the form object
+            if (!empty($formObjects)) {
+                return $formObjects;
             }
 
-        } else {
-            if (!is_array($field)) {
-                $field = [];
-            }
-
-            if (empty($field['return_format'])) {
-                $field['return_format'] = 'post_object';
-            }
-
-            if ($field['return_format'] === 'id') {
-                return (int)$value;
-            }
-
-            if ($field['return_format'] === 'form_object') {
-                $form = GFAPI::get_form($value);
-                //Return the form object if it's not an error object. Otherwise return false.
-                if (!is_wp_error($form)) {
-                    return $form;
-                }
-            }
-
+            // Else return false
             return false;
         }
+
+        // Else
+        if (!is_array($field)) {
+            $field = [];
+        }
+
+        if (empty($field['return_format'])) {
+            $field['return_format'] = 'post_object';
+        }
+
+        if ($field['return_format'] === 'id') {
+            return (int)$value;
+        }
+
+        if ($field['return_format'] === 'form_object') {
+            $form = GFAPI::get_form($value);
+            //Return the form object if it's not an error object. Otherwise return false.
+            if (!is_wp_error($form)) {
+                return $form;
+            }
+        }
+
+        return false;
     }
 }
