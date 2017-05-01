@@ -1,9 +1,8 @@
 <?php
 
-namespace ACFGravityformsField;
+namespace ACFGravityformsAddOn;
 
 use acf_field;
-use RGFormsModel;
 use GFAPI;
 
 class Field extends acf_field
@@ -80,20 +79,20 @@ class Field extends acf_field
         $choices = [];
 
         // Gravityforms not activated? Stop and issue a warning.
-        if (class_exists('RGFormsModel')) {
-            // Get all forms
-            $forms = RGFormsModel::get_forms(1);
-        } else {
+        if (!class_exists('GFAPI')) {
             $warning = __('Warning: Gravityforms needs to be activated in order to use this field.',
                 ACF_GF_FIELD_TEXTDOMAIN);
             $button = '<a class="button" href=' . admin_url('plugins.php') . '>' . __('Activate Gravityforms here',
                     ACF_GF_FIELD_TEXTDOMAIN) . '</a>';
 
-            echo '<p style="color:#d54e21;">' . $warning . '</p>' . $button;
+            echo '<div class="notice notice-alt inline notice-warning"><p>' . $warning . ' ' . $button . '</p></div>';
 
             // Don't continue, because we have nothing to show
             return false;
         }
+
+        // Get all forms
+        $forms = GFAPI::get_forms();
 
         // Check if there are forms and set our choices
         if (!empty($forms)) {
@@ -149,9 +148,9 @@ class Field extends acf_field
      * @param $field
      * @return array|bool
      */
-    public function format_value($value, $post_id, $field)
+    public function format_value($value, $postId, $field)
     {
-        return $this->process_value($value, $field);
+        return $this->processValue($value, $field);
     }
 
     /**
@@ -161,48 +160,48 @@ class Field extends acf_field
      * @param $field
      * @return array|bool|int
      */
-    private function process_value($value, $field)
+    private function processValue($value, $field)
     {
         if (is_array($value)) {
-
-            $form_objects = [];
+            $formObjects = [];
             foreach ($value as $key => $formId) {
-                $form = $this->process_value($formId, $field);
+                $form = $this->processValue($formId, $field);
                 //Add it if it's not an error object
                 if ($form) {
-                    $form_objects[$key] = $form;
+                    $formObjects[$key] = $form;
                 }
             }
 
-            //Return false if the array is empty
-            if (!empty($form_objects)) {
-                return $form_objects;
-            } else {
-                return false;
+            // Return the form object
+            if (!empty($formObjects)) {
+                return $formObjects;
             }
 
-        } else {
-            if (!is_array($field)) {
-                $field = [];
-            }
-
-            if (empty($field['return_format'])) {
-                $field['return_format'] = 'post_object';
-            }
-
-            if ($field['return_format'] === 'id') {
-                return (int)$value;
-            }
-
-            if ($field['return_format'] === 'form_object') {
-                $form = GFAPI::get_form($value);
-                //Return the form object if it's not an error object. Otherwise return false.
-                if (!is_wp_error($form)) {
-                    return $form;
-                }
-            }
-
+            // Else return false
             return false;
         }
+
+        // Else
+        if (!is_array($field)) {
+            $field = [];
+        }
+
+        if (empty($field['return_format'])) {
+            $field['return_format'] = 'post_object';
+        }
+
+        if ($field['return_format'] === 'id') {
+            return (int)$value;
+        }
+
+        if ($field['return_format'] === 'form_object') {
+            $form = GFAPI::get_form($value);
+            //Return the form object if it's not an error object. Otherwise return false.
+            if (!is_wp_error($form)) {
+                return $form;
+            }
+        }
+
+        return false;
     }
 }
