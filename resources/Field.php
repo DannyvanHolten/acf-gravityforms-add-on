@@ -100,17 +100,8 @@ class Field extends acf_field
         $field = array_merge($this->defaults, $field);
         $choices = [];
 
-        // Stop if Gravityforms is not active
-        if (!class_exists('GFAPI')) {
-            $this->notices->isGravityformsActive(true, true);
-
-            return false;
-        }
-
-        // Check if there are forms and set our choices
-        if (!$this->forms) {
-            $this->notices->hasActiveGravityForms(true, true);
-
+        // Check if we have some valid forms
+        if (!$this->hasValidForms()) {
             return false;
         }
 
@@ -224,5 +215,29 @@ class Field extends acf_field
         }
 
         return false;
+    }
+
+    /**
+     * Check if we actually have forms that we can use for our field
+     *
+     * @return bool
+     */
+    public function hasValidForms()
+    {
+        // Stop if Gravityforms is not active
+        if (!class_exists('GFAPI')) {
+            $this->notices->isGravityformsActive(true, true);
+
+            return false;
+        }
+
+        // Check if there are forms and set our choices
+        if (!$this->forms) {
+            $this->notices->hasActiveGravityForms(true, true);
+
+            return false;
+        }
+
+        return true;
     }
 }

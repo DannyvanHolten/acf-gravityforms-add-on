@@ -44,9 +44,7 @@ class Notices
 
     public function hasActiveGravityForms($inline = '', $alt = '')
     {
-        $forms = GFAPI::get_forms();
-
-        if (!$this->$forms) {
+        if (!$this->forms) {
             $notice = sprintf(__(' Warning: There are no active forms. You need to <a href="%s">Create a New Form</a> in order to use the Advanced Custom Fields: Gravityforms Add-on.',
                 ACF_GF_FIELD_TEXTDOMAIN), admin_url('admin.php?page=gf_new_form'));
 
