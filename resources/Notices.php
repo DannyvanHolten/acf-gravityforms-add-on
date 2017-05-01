@@ -7,6 +7,20 @@ use GFAPI;
 class Notices
 {
     /**
+     * Get our forms
+     *
+     * @var array
+     */
+    public $forms;
+
+    public function __construct()
+    {
+        if (class_exists('GFAPI')) {
+            $this->forms = GFAPI::get_forms();
+        }
+    }
+
+    /**
      * Make sure all hooks are being executed.
      */
     public function addHooks()
@@ -32,7 +46,7 @@ class Notices
     {
         $forms = GFAPI::get_forms();
 
-        if (empty($forms)) {
+        if (!$this->$forms) {
             $notice = sprintf(__(' Warning: There are no active forms. You need to <a href="%s">Create a New Form</a> in order to use the Advanced Custom Fields: Gravityforms Add-on.',
                 ACF_GF_FIELD_TEXTDOMAIN), admin_url('admin.php?page=gf_new_form'));
 

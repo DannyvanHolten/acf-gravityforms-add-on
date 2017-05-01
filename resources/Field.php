@@ -7,7 +7,19 @@ use GFAPI;
 
 class Field extends acf_field
 {
+    /**
+     * Make sure we can easily access our notices
+     *
+     * @var Notices
+     */
     public $notices;
+
+    /**
+     * Get our forms
+     *
+     * @var array
+     */
+    public $forms;
 
     public function __construct()
     {
@@ -22,6 +34,10 @@ class Field extends acf_field
 
         // Get our notices up and running
         $this->notices = new Notices();
+
+        if (class_exists('GFAPI')) {
+            $this->forms = GFAPI::get_forms();
+        }
 
         // Execute the parent constructor as well
         parent::__construct();
@@ -91,17 +107,14 @@ class Field extends acf_field
             return false;
         }
 
-        // Get all forms
-        $forms = GFAPI::get_forms();
-
         // Check if there are forms and set our choices
-        if (empty($forms)) {
+        if (!$this->forms) {
             $this->notices->hasActiveGravityForms(true, true);
 
             return false;
         }
 
-        foreach ($forms as $form) {
+        foreach ($this->forms as $form) {
             $choices[$form['id']] = $form['title'];
         }
 
@@ -145,7 +158,7 @@ class Field extends acf_field
         $fieldHhtml .= $fieldOptions;
         $fieldHhtml .= '</select>';
 
-        return $fieldHhtml;
+        echo $fieldHhtml;
     }
 
     /**
