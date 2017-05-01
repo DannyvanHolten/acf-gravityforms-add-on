@@ -80,7 +80,9 @@ class Field extends acf_field
      */
     public function render_field($field)
     {
-        // Give a notice if Gravityforms is not active
+        // Set our defaults
+        $field = array_merge($this->defaults, $field);
+        $choices = [];
 
         // Stop if Gravityforms is not active
         if (!class_exists('GFAPI')) {
@@ -88,9 +90,6 @@ class Field extends acf_field
 
             return false;
         }
-
-        $field = array_merge($this->defaults, $field);
-        $choices = [];
 
         // Get all forms
         $forms = GFAPI::get_forms();
@@ -103,32 +102,50 @@ class Field extends acf_field
         }
 
         foreach ($forms as $form) {
-            $choices[$form->id] = ucfirst($form->title);
+            $choices[$form['id']] = $form['title'];
         }
 
         // Override field settings and start rendering
         $field['choices'] = $choices;
         $field['type'] = 'select';
+        // Create a css id for our field
+        $fieldId = str_replace(['[', ']'], ['-', ''], $field['name']);
 
-        // Start building the html for our field
-        $html = $field['multiple'] ? '<input type="hidden" name="{$field[\'name\']}">' : '';
-        $html .= '<select id="' . str_replace(['[', ']'], ['-', ''], $field['name']) . '" name="' . $field['name'];
-        $html .= $field['multiple'] ? '[]" multiple="multiple" data-multiple="1">' : '">';
-        $html .= $field['allow_null'] ? '<option value="">' . __('- Select a form -',
-                ACF_GF_FIELD_TEXTDOMAIN) . '</option>' : '';
+        // Check if we're allowing multiple selections.
+        $hiddenField = '';
+        $multiple = '';
+        $fieldOptions = '';
+
+        if ($field['multiple']) {
+            $hiddenField = '<input type="hidden" name="{$field[\'name\']}">';
+            $multiple = '[]" multiple="multiple" data-multiple="1';
+        }
+
+        // Check if we're allowing an empty form. If so, create a default option
+        if ($field['allow_null']) {
+            $fieldOptions .= '<option value="">' . __('- Select a form -', ACF_GF_FIELD_TEXTDOMAIN) . '</option>';
+        }
 
         // Loop trough all our choices
         foreach ($field['choices'] as $formId => $formTitle) {
-            $html .= '<option value="' . $formId . '"';
-            $html .= (is_array($field['value']) && in_array($formId, $field['value'],
-                    false)) || $field['value'] === $formId ? ' selected="selected"' : '';
-            $html .= '>' . $formTitle . '</option>';
+            $selected = '';
+
+            if ((is_array($field['value']) && in_array($formId, $field['value'], false))
+                || (int)$field['value'] === (int)$formId
+            ) {
+                $selected = ' selected';
+            }
+
+            $fieldOptions .= '<option value="' . $formId . '"' . $selected . '>' . $formTitle . '</option>';
         }
 
-        // Close the field
-        $html .= '</select>';
+        // Start building the html for our field
+        $fieldHhtml = $hiddenField;
+        $fieldHhtml .= '<select id="' . $fieldId . '" name="' . $field['name'] . $multiple . '">';
+        $fieldHhtml .= $fieldOptions;
+        $fieldHhtml .= '</select>';
 
-        echo $html;
+        return $fieldHhtml;
     }
 
     /**
@@ -139,7 +156,7 @@ class Field extends acf_field
      * @param $field
      * @return array|bool
      */
-    public function format_value($value, $postId, $field)
+    public function format_value($value, $field)
     {
         return $this->processValue($value, $field);
     }

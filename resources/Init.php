@@ -25,7 +25,8 @@ class Init
      */
     private function addNotices()
     {
-        new Notices();
+        $notices = new Notices();
+        $notices->addHooks();
     }
 
     /**

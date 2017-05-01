@@ -100,19 +100,14 @@ class FieldForV4 extends acf_field
      */
     public function create_field($field)
     {
+        // Set our defaults
         $field = array_merge($this->defaults, $field);
         $choices = [];
 
-        // Gravityforms not activated? Stop and issue a warning.
+        // Stop if Gravityforms is not active
         if (!class_exists('GFAPI')) {
-            $warning = __('Warning: Gravityforms needs to be activated in order to use this field.',
-                ACF_GF_FIELD_TEXTDOMAIN);
-            $button = '<a class="button" href=' . admin_url('plugins.php') . '>' . __('Activate Gravityforms here',
-                    ACF_GF_FIELD_TEXTDOMAIN) . '</a>';
+            $this->notices->isGravityformsActive(true, true);
 
-            echo '<p style="color:#d54e21;">' . $warning . '</p>' . $button;
-
-            // Don't continue, because we have nothing to show
             return false;
         }
 
@@ -120,12 +115,14 @@ class FieldForV4 extends acf_field
         $forms = GFAPI::get_forms();
 
         // Check if there are forms and set our choices
-        if (!empty($forms)) {
-            foreach ($forms as $form) {
-                if ((int)$form->is_active === 1) { // === is not possible because it doesn't recognize the type
-                    $choices[$form->id] = ucfirst($form->title);
-                }
-            }
+        if (empty($forms)) {
+            $this->notices->hasActiveGravityForms(true, true);
+
+            return false;
+        }
+
+        foreach ($forms as $form) {
+            $choices[$form['id']] = $form['title'];
         }
 
         // Override field settings and start rendering
