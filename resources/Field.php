@@ -80,14 +80,8 @@ class Field extends acf_field
 
         // Gravityforms not activated? Stop and issue a warning.
         if (!class_exists('GFAPI')) {
-            $warning = __('Warning: Gravityforms needs to be activated in order to use this field.',
-                ACF_GF_FIELD_TEXTDOMAIN);
-            $button = '<a class="button" href=' . admin_url('plugins.php') . '>' . __('Activate Gravityforms here',
-                    ACF_GF_FIELD_TEXTDOMAIN) . '</a>';
+            Notices::isGravityFormsActive();
 
-            echo '<div class="notice notice-alt inline notice-warning"><p>' . $warning . ' ' . $button . '</p></div>';
-
-            // Don't continue, because we have nothing to show
             return false;
         }
 
@@ -95,24 +89,14 @@ class Field extends acf_field
         $forms = GFAPI::get_forms();
 
         // Check if there are forms and set our choices
-        if (!empty($forms)) {
-            foreach ($forms as $form) {
-                if ((int)$form->is_active === 1) { // === is not possible because it doesn't recognize the type
-                    $choices[$form->id] = ucfirst($form->title);
-                }
-            }
+        if (empty($forms)) {
+            Notices::hasActiveGravityForm();
+
+            return false;
         }
 
-        // No active forms? Stop and issue a warning.
-        if (empty($choices)) {
-            $warning = __('Warning: There are no active forms. You need to create or activate a form first',
-                ACF_GF_FIELD_TEXTDOMAIN);
-            $button = '<a class="button" href=' . admin_url('admin.php?page=gf_new_form') . '>' . __('Create a New Form',
-                    'gravityforms') . '</a>';
-            echo '<p style="color:#d54e21;">' . $warning . '</p>' . $button;
-
-            // Don't continue, because we have nothing to show
-            return false;
+        foreach ($forms as $form) {
+            $choices[$form->id] = ucfirst($form->title);
         }
 
         // Override field settings and start rendering

@@ -2,21 +2,10 @@
 
 namespace ACFGravityformsAddOn;
 
+use GFAPI;
+
 class Notices
 {
-    public function __construct()
-    {
-        $this->addHooks();
-    }
-
-    /**
-     * Make sure all hooks are being executed.
-     */
-    private function addHooks()
-    {
-
-    }
-
     /**
      * Check if gravityforms is active. If not, issue a notice
      */
@@ -38,6 +27,19 @@ class Notices
         if (!function_exists('get_field')) {
             echo '<div class="notice notice-warning"><p>'
                 . __('Warning: Advanced Custom Fields needs to be activated in order to use the Advanced Custom Fields: Gravityforms Add-on.',
+                    'gravityforms-acf-field') .
+                '</p></div>';
+        }
+    }
+
+    /**
+     * Check if gravityforms is active. If not, issue a notice
+     */
+    public static function hasActiveGravityForm($inline = false, $alt = false)
+    {
+        if (!GFAPI::get_forms()) {
+            echo '<div class="notice notice-warning ' . $inline ? 'notice-inline' : '' . '"><p>'
+                . __('Warning: Gravityform has no active forms. You need to create or activate a form in order to use the Advanced Custom Fields: Gravityforms Add-on.',
                     'gravityforms-acf-field') .
                 '</p></div>';
         }
