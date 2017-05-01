@@ -32,7 +32,7 @@ class Notices
     /**
      * Check if gravityforms is active. If not, issue a notice
      */
-    public function isGravityFormsActive($inline = false, $alt = false)
+    public function isGravityFormsActive($inline = '', $alt = '')
     {
         if (!class_exists('GFAPI')) {
             $notice = sprintf(__('Warning: You need to <a href="%s">Activate Gravityforms</a> in order to use the Advanced Custom Fields: Gravityforms Add-on.',
@@ -42,7 +42,7 @@ class Notices
         }
     }
 
-    public function hasActiveGravityForms($inline = false, $alt = false)
+    public function hasActiveGravityForms($inline = '', $alt = '')
     {
         $forms = GFAPI::get_forms();
 
@@ -57,7 +57,7 @@ class Notices
     /**
      * Check if gravityforms is active. If not, issue a notice
      */
-    public function isAdvancedCustomFieldsActive($inline = false, $alt = false)
+    public function isAdvancedCustomFieldsActive($inline = '', $alt = '')
     {
         if (!function_exists('get_field')) {
             $notice = sprintf(__('Warning: You need to <a href="%s">Activate Advanced Custom Fields</a> in order to use the Advanced Custom Fields: Gravityforms Add-on.',
@@ -70,7 +70,7 @@ class Notices
     /**
      * A wrapper for all the notices.
      */
-    public function createNotice($notice, $inline = false, $alt = false)
+    public function createNotice($notice, $inline = '', $alt = '')
     {
         $inline = $inline ? ' inline' : '';
         $alt = $alt ? ' notice-alt' : '';
