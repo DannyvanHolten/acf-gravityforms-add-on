@@ -108,44 +108,26 @@ class Field extends acf_field
         // Override field settings and start rendering
         $field['choices'] = $choices;
         $field['type'] = 'select';
-        // Create a css id for our field
-        $fieldId = str_replace(['[', ']'], ['-', ''], $field['name']);
 
-        // Check if we're allowing multiple selections.
-        $hiddenField = '';
-        $multiple = '';
-        $fieldOptions = '';
-
-        if ($field['multiple']) {
-            $hiddenField = '<input type="hidden" name="{$field[\'name\']}">';
-            $multiple = '[]" multiple="multiple" data-multiple="1';
-        }
-
-        // Check if we're allowing an empty form. If so, create a default option
-        if ($field['allow_null']) {
-            $fieldOptions .= '<option value="">' . __('- Select a form -', ACF_GF_FIELD_TEXTDOMAIN) . '</option>';
-        }
+        // Start building the html for our field
+        $html = $field['multiple'] ? '<input type="hidden" name="{$field[\'name\']}">' : '';
+        $html .= '<select id="' . str_replace(['[', ']'], ['-', ''], $field['name']) . '" name="' . $field['name'];
+        $html .= $field['multiple'] ? '[]" multiple="multiple" data-multiple="1">' : '">';
+        $html .= $field['allow_null'] ? '<option value="">' . __('- Select a form -',
+                ACF_GF_FIELD_TEXTDOMAIN) . '</option>' : '';
 
         // Loop trough all our choices
         foreach ($field['choices'] as $formId => $formTitle) {
-            $selected = '';
-
-            if ((is_array($field['value']) && in_array($formId, $field['value'], false))
-                || (int)$field['value'] === (int)$formId
-            ) {
-                $selected = ' selected';
-            }
-
-            $fieldOptions .= '<option value="' . $formId . '"' . $selected . '>' . $formTitle . '</option>';
+            $html .= '<option value="' . $formId . '"';
+            $html .= (is_array($field['value']) && in_array($formId, $field['value'],
+                    false)) || (int)$field['value'] === (int)$formId ? ' selected' : '';
+            $html .= '>' . $formTitle . '</option>';
         }
 
-        // Start building the html for our field
-        $fieldHhtml = $hiddenField;
-        $fieldHhtml .= '<select id="' . $fieldId . '" name="' . $field['name'] . $multiple . '">';
-        $fieldHhtml .= $fieldOptions;
-        $fieldHhtml .= '</select>';
+        // Close the field
+        $html .= '</select>';
 
-        return $fieldHhtml;
+        echo $html;
     }
 
     /**
