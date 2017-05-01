@@ -23,24 +23,24 @@ class Notices
     /**
      * Check if gravityforms is active. If not, issue a notice
      */
-    public static function isGravityFormsActive($inline = false, $alt = false)
+    public function isGravityFormsActive($inline = false, $alt = false)
     {
         if (!class_exists('GFAPI')) {
             $notice = sprintf(__('Warning: You need to <a href="%s">Activate Gravityforms</a> in order to use the Advanced Custom Fields: Gravityforms Add-on.',
                 ACF_GF_FIELD_TEXTDOMAIN), admin_url('admin.php?page=gf_new_form'));
 
-            self::createNotice($notice, $inline, $alt);
+            $this->createNotice($notice, $inline, $alt);
         }
     }
 
-    public static function hasActiveGravityForms($inline = false, $alt = false)
+    public function hasActiveGravityForms($inline = false, $alt = false)
     {
         $forms = GFAPI::get_forms();
         if (empty($forms)) {
             $notice = sprintf(__(' Warning: There are no active forms. You need to <a href="%s">Create a New Form</a> in order to use the Advanced Custom Fields: Gravityforms Add-on.',
                 ACF_GF_FIELD_TEXTDOMAIN), admin_url('admin.php?page=gf_new_form'));
 
-            self::createNotice($notice, $inline, $alt);
+            $this->createNotice($notice, $inline, $alt);
         }
     }
 
@@ -53,14 +53,14 @@ class Notices
             $notice = __('Warning: Advanced Custom Fields needs to be activated in order to use the Advanced Custom Fields: Gravityforms Add-on.',
                 ACF_GF_FIELD_TEXTDOMAIN);
 
-            self::createNotice($notice);
+            $this->createNotice($notice);
         }
     }
 
     /**
      * A wrapper for all the notices.
      */
-    public static function createNotice($notice, $inline = false, $alt = false)
+    public function createNotice($notice, $inline = false, $alt = false)
     {
         $inline = $inline ? ' inline' : '';
         $alt = $alt ? ' notice-alt' : '';
