@@ -176,6 +176,7 @@ class Field extends acf_field
     {
         if (is_array($value)) {
             $formObjects = [];
+
             foreach ($value as $key => $formId) {
                 $form = $this->processValue($formId, $field);
                 //Add it if it's not an error object
@@ -193,25 +194,17 @@ class Field extends acf_field
             return false;
         }
 
-        // Else
-        if (!is_array($field)) {
-            $field = [];
-        }
+        // Make sure field is an array
+        $field = (array)$field;
 
-        if (empty($field['return_format'])) {
-            $field['return_format'] = 'post_object';
-        }
-
-        if ($field['return_format'] === 'id') {
+        if (!empty($field['return_format'] && $field['return_format'] === 'id') {
             return (int)$value;
         }
+        $form = GFAPI::get_form($value);
 
-        if ($field['return_format'] === 'form_object') {
-            $form = GFAPI::get_form($value);
-            //Return the form object if it's not an error object. Otherwise return false.
-            if (!is_wp_error($form)) {
-                return $form;
-            }
+        //Return the form object if it's not an error object. Otherwise return false.
+        if (!is_wp_error($form)) {
+            return $form;
         }
 
         return false;
