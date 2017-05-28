@@ -37,7 +37,7 @@ class FieldForV4 extends acf_field
 
     public function __construct()
     {
-        $this->name = 'form';
+        $this->name = 'forms';
         $this->label = __('Forms', 'gravityforms');
         $this->category = __('Relational', 'acf'); // Basic, Content, Choice, etc
         $this->defaults = [
@@ -138,6 +138,8 @@ class FieldForV4 extends acf_field
         // Override field settings and start rendering
         $field['choices'] = $choices;
         $field['type'] = 'select';
+
+        do_action('acf/create_field', $field);
     }
 
 
