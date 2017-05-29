@@ -74,6 +74,25 @@ class FieldForV4 extends acf_field
         ?>
         <tr class="field_option field_option_<?php echo $this->name; ?>">
             <td class="label">
+                <label><?php echo __('Return Value', 'acf'); ?></label>
+            </td>
+            <td>
+                <?php
+                do_action('acf/create_field', [
+                    'type'    => 'radio',
+                    'name'    => 'fields[' . $key . '][return_format]',
+                    'value'   => $field['return_format'],
+                    'choices' => [
+                        'post_object' => __('Post Object', 'acf'),
+                        'id' => __('Post ID', 'acf')
+                    ],
+                    'layout'  => 'horizontal',
+                ]); ?>
+            </td>
+        </tr>
+
+        <tr class="field_option field_option_<?php echo $this->name; ?>">
+            <td class="label">
                 <label><?php echo __('Allow Null?', 'acf'); ?></label>
             </td>
             <td>
@@ -151,31 +170,9 @@ class FieldForV4 extends acf_field
      * @param $field
      * @return array|bool
      */
-    public function format_value_for_api($value)
+    public function format_value_for_api($value, $post_id, $field)
     {
-        //If there are multiple forms, construct and return an array of form objects
-        if (!empty($value) && is_array($value)) {
-            $formObjects = [];
-            foreach ($value as $key => $formId) {
-                $form = GFAPI::get_form($formId);
-
-                if (!is_wp_error($form)) { // Add it if it's not an error object
-                    $formObjects[$key] = $form;
-                }
-            }
-
-            if (!empty($formObjects)) { //Return false if the array is empty
-                return $formObjects;
-            }
-        } elseif (!empty($value)) {  // If not an array return single form object
-
-            $form = GFAPI::get_form($value);
-            if (!is_wp_error($form)) { // Return the form object if it's not an error object. Otherwise return false.
-                return $form;
-            }
-        }
-
-        // Return false if value is empty
-        return false;
+        $fieldObject = New Field();
+        return $fieldObject->processValue($value, $field);
     }
 }

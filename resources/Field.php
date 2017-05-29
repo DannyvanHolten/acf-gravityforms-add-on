@@ -172,7 +172,7 @@ class Field extends acf_field
      * @param $field
      * @return array|bool|int
      */
-    private function processValue($value, $field)
+    public function processValue($value, $field)
     {
         if (is_array($value)) {
             $formObjects = [];
