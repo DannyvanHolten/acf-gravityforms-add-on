@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+* Added the support for a return format in V4
+
+### Changed
+* Improved coding by applying the improvements gathered trough codeclimate.
 
 ## [1.1.1] - 2017-04-15
 ### Added
