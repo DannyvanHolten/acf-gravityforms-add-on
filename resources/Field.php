@@ -197,7 +197,7 @@ class Field extends acf_field
         // Make sure field is an array
         $field = (array)$field;
 
-        if (!empty($field['return_format'] && $field['return_format'] === 'id') {
+        if (!empty($field['return_format'] && $field['return_format'] === 'id')) {
             return (int)$value;
         }
         $form = GFAPI::get_form($value);
