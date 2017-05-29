@@ -170,7 +170,7 @@ class FieldForV4 extends acf_field
      * @param $field
      * @return array|bool
      */
-    public function format_value_for_api($value, $post_id, $field)
+    public function format_value_for_api($value, $postId, $field)
     {
         $fieldObject = New Field();
         return $fieldObject->processValue($value, $field);

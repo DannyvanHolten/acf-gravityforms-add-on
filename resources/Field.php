@@ -160,7 +160,7 @@ class Field extends acf_field
      * @param $field
      * @return array|bool
      */
-    public function format_value($value, $post_id, $field)
+    public function format_value($value, $postId, $field)
     {
         return $this->processValue($value, $field);
     }
