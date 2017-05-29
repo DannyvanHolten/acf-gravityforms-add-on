@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 } // Exit if accessed directly
 
 // Define multiple necessary constants
-define('ACF_GF_FIELD_VERSION', '1.1.1');
+define('ACF_GF_FIELD_VERSION', '1.2');
 define('ACF_GF_FIELD_TEXTDOMAIN', 'acf-gravityforms-add-on');
 define('ACF_GF_FIELD_LANGUAGES', dirname(plugin_basename(__FILE__)) . '/languages/');
 
