@@ -58,6 +58,7 @@ As Gravityforms & Advanced Custom Fields are continuously in development we like
 
 - [x] Add dutch translations
 - [x] Create an admin notice when plug-in gets activated but Gravityforms is not activated yet
+- [x] Improve code by implementing code climate's hints.
 
 ## Credits
 
