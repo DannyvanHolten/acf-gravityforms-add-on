@@ -19,3 +19,5 @@ yarn.lock export-ignore
 *.map export-ignore
 README.md export-ignore
 CHANGELOG.md export-ignore
+
+.codeclimate.yml export-ignore
