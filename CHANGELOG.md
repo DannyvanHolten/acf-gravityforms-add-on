@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Changed
+* Changed the terminology of the return format
+
+### Fixed
+* Fixed broken dutch translation for the error messages
 
 ## [1.2] - 2017-05-29
 ### Added
