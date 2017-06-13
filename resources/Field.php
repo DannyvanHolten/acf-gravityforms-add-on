@@ -246,9 +246,10 @@ class Field extends acf_field
      *  @return $value - the modified value
      */
     public function update_value( $value, $post_id, $field ) {
+	    return $value;
         // Strip empty array values
         if ( is_array( $value ) ) {
-            $values = array_values( array_filter( $value ) );
+            $value = array_values( array_filter( $value ) );
         }
         return $value;
     }
