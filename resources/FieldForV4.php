@@ -83,8 +83,8 @@ class FieldForV4 extends acf_field
                     'name'    => 'fields[' . $key . '][return_format]',
                     'value'   => $field['return_format'],
                     'choices' => [
-                        'post_object' => __('Post Object', 'acf'),
-                        'id' => __('Post ID', 'acf')
+                        'post_object' => __('Form Object', ACF_GF_FIELD_TEXTDOMAIN),
+                        'id' => __('Form ID', ACF_GF_FIELD_TEXTDOMAIN)
                     ],
                     'layout'  => 'horizontal',
                 ]); ?>
@@ -159,6 +159,25 @@ class FieldForV4 extends acf_field
         $field['type'] = 'select';
 
         do_action('acf/create_field', $field);
+    }
+    
+    /*
+     *  update_value()
+     *
+     *  This filter is applied to the $value before it is updated in the db
+     *
+     *  @param  $value - the value which will be saved in the database
+     *  @param  $post_id - the $post_id of which the value will be saved
+     *  @param  $field - the field array holding all the field options
+     *
+     *  @return $value - the modified value
+     */
+    public function update_value( $value, $post_id, $field ) {
+        // Strip empty array values
+        if ( is_array( $value ) ) {
+            $values = array_values( array_filter( $value ) );
+        }
+        return $value;
     }
 
 
