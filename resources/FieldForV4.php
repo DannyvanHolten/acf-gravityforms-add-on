@@ -160,6 +160,25 @@ class FieldForV4 extends acf_field
 
         do_action('acf/create_field', $field);
     }
+    
+    /*
+     *  update_value()
+     *
+     *  This filter is applied to the $value before it is updated in the db
+     *
+     *  @param  $value - the value which will be saved in the database
+     *  @param  $post_id - the $post_id of which the value will be saved
+     *  @param  $field - the field array holding all the field options
+     *
+     *  @return $value - the modified value
+     */
+    public function update_value( $value, $post_id, $field ) {
+        // Strip empty array values
+        if ( is_array( $value ) ) {
+            $value = array_values( array_filter( $value ) );
+        }
+        return $value;
+    }
 
     /**
      *  This filter is applied to the $value before it is updated in the db
