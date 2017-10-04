@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 * Fixed broken dutch translation for the error messages
+* Fixed formatting issue on multi-select
 
 ## [1.2] - 2017-05-29
 ### Added
