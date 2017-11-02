@@ -46,29 +46,7 @@ or if you make use of WPackagist
 
 == Changelog ==
 
-## 1.1.1
-### Fixed
-* Fixed the preselecting of values because of a typehinting bug.
+Further changes can be found in the [changelog](https://github.com/DannyvanHolten/acf-gravityforms-add-on/blob/master/CHANGELOG.md)
 
-## 1.1
-### Added
-* Added admin notices to check if ACF & Gravityforms are active
-
-## 1.0.1
-### Fixed
-* Fixed a bug not causing the multiple option to render in ACF V4
-
-## 1.0
-### Added
-* Changed names because of release on WordPress
-* Documentation for WordPress
-
-## 0.2
-### Changed
-* Refactor the entire repo. Doesn't look the same at all anymore
-
-## 0.1
-### Added
+= 0.1 =
 * The repo is set up
-
-== Upgrade Notice ==
