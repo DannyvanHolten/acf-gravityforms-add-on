@@ -42,6 +42,9 @@ class Notices
         }
     }
 
+    /**
+     * Check if there are any active gravityforms forms. If not, issue a notice
+     */
     public function hasActiveGravityForms($inline = '', $alt = '')
     {
         if (!$this->forms) {
@@ -53,7 +56,7 @@ class Notices
     }
 
     /**
-     * Check if gravityforms is active. If not, issue a notice
+     * Check if advanced custom fields is active. If not, issue a notice
      */
     public function isAdvancedCustomFieldsActive($inline = '', $alt = '')
     {
