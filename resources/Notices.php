@@ -13,11 +13,20 @@ class Notices
      */
     public $forms;
 
+    /**
+     * Acces utility methods
+     *
+     * @var Utils
+     */
+    public $utils;
+
     public function __construct()
     {
         if (class_exists('GFAPI')) {
             $this->forms = GFAPI::get_forms();
         }
+
+        $this->utils = new Utils();
     }
 
     /**
@@ -30,16 +39,25 @@ class Notices
     }
 
     /**
-     * Check if gravityforms is active. If not, issue a notice
+     * Check if gravityforms is installled and active. If not, issue an activation or installation notice
      */
     public function isGravityFormsActive($inline = '', $alt = '')
     {
-        if (!class_exists('GFAPI')) {
-            $notice = sprintf(__('Warning: You need to <a href="%s">Activate Gravityforms</a> in order to use the Advanced Custom Fields: Gravityforms Add-on.',
-                ACF_GF_FIELD_TEXTDOMAIN), admin_url('plugins.php'));
+        $notice = "";
 
-            $this->createNotice($notice, $inline, $alt);
+        if ($this->utils->isPluginInstalled("Gravity Forms")) {
+            if (!class_exists('GFAPI')) {
+                $activateUrl = $this->utils->generatePluginActivationLinkUrl('gravityforms/gravityforms.php');
+
+                $notice = sprintf(__('Warning: You need to <a href="%s">Activate Gravityforms</a> in order to use the Advanced Custom Fields: Gravityforms Add-on.',
+                    ACF_GF_FIELD_TEXTDOMAIN), $activateUrl);
+            }
+        } else {
+            $notice = sprintf(__('Warning: You need to <a href="%s" target="_blank">Install Gravityforms</a> in order to use the Advanced Custom Fields: Gravityforms Add-on.',
+                ACF_GF_FIELD_TEXTDOMAIN), 'http://www.gravityforms.com');
         }
+        
+        if ($notice) $this->createNotice($notice, $inline, $alt);
     }
 
     /**
@@ -56,16 +74,27 @@ class Notices
     }
 
     /**
-     * Check if advanced custom fields is active. If not, issue a notice
+     * Check if advanced custom fields is installed and active. If not, issue an activation or installation notice
      */
     public function isAdvancedCustomFieldsActive($inline = '', $alt = '')
     {
-        if (!function_exists('get_field')) {
-            $notice = sprintf(__('Warning: You need to <a href="%s">Activate Advanced Custom Fields</a> in order to use the Advanced Custom Fields: Gravityforms Add-on.',
-                ACF_GF_FIELD_TEXTDOMAIN), admin_url('plugins.php'));
+        $notice = "";
 
-            $this->createNotice($notice, $inline, $alt);
+        if ($this->utils->isPluginInstalled("Advanced Custom Fields")) {
+            if (!class_exists('acf')) {
+                $activateUrl = $this->utils->generatePluginActivationLinkUrl('advanced-custom-fields/acf.php');
+
+                $notice = sprintf(__('Warning: You need to <a href="%s">Activate Advanced Custom Fields</a> in order to use the Advanced Custom Fields: Gravityforms Add-on.',
+                    ACF_GF_FIELD_TEXTDOMAIN), $activateUrl);
+            }
+        } else {
+            $installUrl = $this->utils->generatePluginInstallLinkUrl('advanced-custom-fields');
+
+            $notice = sprintf(__('Warning: You need to <a href="%s">Install Advanced Custom Fields</a> in order to use the Advanced Custom Fields: Gravityforms Add-on.',
+                ACF_GF_FIELD_TEXTDOMAIN), $installUrl);
         }
+
+        if ($notice) $this->createNotice($notice, $inline, $alt);
     }
 
     /**
