@@ -11,13 +11,21 @@ class Notices
      *
      * @var array
      */
-    public $forms;
+    static $forms;
 
     public function __construct()
     {
-        if (class_exists('GFAPI')) {
-            $this->forms = GFAPI::get_forms();
+        
+    }
+    
+    function get_forms()
+    {
+        if (!isset(self::$forms) && class_exists('GFAPI')) {
+            self::$forms = GFAPI::get_forms();
+            
         }
+
+        return self::$forms;
     }
 
     /**
@@ -44,7 +52,7 @@ class Notices
 
     public function hasActiveGravityForms($inline = '', $alt = '')
     {
-        if (!$this->forms) {
+        if (!$this->get_forms()) {
             $notice = sprintf(__(' Warning: There are no active forms. You need to <a href="%s">Create a New Form</a> in order to use the Advanced Custom Fields: Gravityforms Add-on.',
                 ACF_GF_FIELD_TEXTDOMAIN), admin_url('admin.php?page=gf_new_form'));
 
