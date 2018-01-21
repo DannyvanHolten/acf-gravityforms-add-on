@@ -35,9 +35,9 @@ class Field extends acf_field
         // Get our notices up and running
         $this->notices = new Notices();
 
-        if (class_exists('GFAPI')) {
-            $this->forms = GFAPI::get_forms();
-        }
+	    if (class_exists('GFFormsModel')) {
+		    $this->forms = \GFFormsModel::get_forms();
+	    }
 
         // Execute the parent constructor as well
         parent::__construct();
@@ -106,7 +106,7 @@ class Field extends acf_field
         }
 
         foreach ($this->forms as $form) {
-            $choices[$form['id']] = $form['title'];
+            $choices[ $form->id ] = $form->title;
         }
 
         // Override field settings and start rendering
