@@ -3,7 +3,7 @@
 namespace ACFGravityformsField;
 
 use acf_field;
-use GFAPI;
+use GFFormsModel;
 
 class Field extends acf_field
 {
@@ -36,7 +36,7 @@ class Field extends acf_field
         $this->notices = new Notices();
 
 	    if (class_exists('GFFormsModel')) {
-		    $this->forms = \GFFormsModel::get_forms();
+		    $this->forms = GFFormsModel::get_forms();
 	    }
 
         // Execute the parent constructor as well
@@ -237,7 +237,7 @@ class Field extends acf_field
     public function hasValidForms()
     {
         // Stop if Gravityforms is not active
-        if (!class_exists('GFAPI')) {
+        if (!class_exists('GFFormsModel')) {
             $this->notices->isGravityformsActive(true, true);
 
             return false;

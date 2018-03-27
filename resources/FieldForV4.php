@@ -3,7 +3,7 @@
 namespace ACFGravityformsField;
 
 use acf_field;
-use GFAPI;
+use GFFormsModel;
 
 class FieldForV4 extends acf_field
 {
@@ -50,7 +50,7 @@ class FieldForV4 extends acf_field
         $this->notices = new Notices();
 
 	    if (class_exists('GFFormsModel')) {
-		    $this->forms = \GFFormsModel::get_forms();
+		    $this->forms = GFFormsModel::get_forms();
 	    }
 
         // Execute the parent constructor as well

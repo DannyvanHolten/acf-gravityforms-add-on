@@ -2,7 +2,7 @@
 
 namespace ACFGravityformsField;
 
-use GFAPI;
+use GFFormsModel;
 
 class Notices
 {
@@ -16,7 +16,7 @@ class Notices
     public function __construct()
     {
         if (class_exists('GFFormsModel')) {
-            $this->forms = \GFFormsModel::get_forms();
+            $this->forms = GFFormsModel::get_forms();
         }
     }
 
