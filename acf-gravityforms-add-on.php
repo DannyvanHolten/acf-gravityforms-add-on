@@ -25,4 +25,4 @@ define('ACF_GF_FIELD_RESOURCES', __DIR__ . '/resources/');
 require_once __DIR__ . '/vendor/autoload.php';
 
 // Initiate the field!
-new ACFGravityformsField\Init();
+add_action( 'init', function() { new ACFGravityformsField\Init(); } );
