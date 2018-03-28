@@ -43,9 +43,9 @@ class Notices
      */
     public function isGravityFormsActive($inline = '', $alt = '')
     {
-        $notice = "";
+        $notice = '';
 
-        if ($this->utils->isPluginInstalled("Gravity Forms")) {
+        if ($this->utils->isPluginInstalled('Gravity Forms')) {
             if (!class_exists('GFAPI')) {
                 $activateUrl = $this->utils->generatePluginActivationLinkUrl('gravityforms/gravityforms.php');
 
@@ -78,9 +78,9 @@ class Notices
      */
     public function isAdvancedCustomFieldsActive($inline = '', $alt = '')
     {
-        $notice = "";
+        $notice = '';
 
-        if ($this->utils->isPluginInstalled("Advanced Custom Fields")) {
+        if ($this->utils->isPluginInstalled('Advanced Custom Fields')) {
             if (!class_exists('acf')) {
                 $activateUrl = $this->utils->generatePluginActivationLinkUrl('advanced-custom-fields/acf.php');
 
