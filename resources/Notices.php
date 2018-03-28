@@ -53,7 +53,7 @@ class Notices
                     ACF_GF_FIELD_TEXTDOMAIN), $activateUrl);
             }
         } else {
-            $notice = sprintf(__('Warning: You need to <a href="%s" target="_blank">Install Gravityforms</a> in order to use the Advanced Custom Fields: Gravityforms Add-on.',
+            $notice = sprintf(__('Warning: You need to <a href="%s">Install Gravityforms</a> in order to use the Advanced Custom Fields: Gravityforms Add-on.',
                 ACF_GF_FIELD_TEXTDOMAIN), 'http://www.gravityforms.com');
         }
         
