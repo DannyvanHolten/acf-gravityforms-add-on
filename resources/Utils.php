@@ -58,7 +58,7 @@ class Utils
         foreach ($installedPlugins as $installedPlugin => $data) {
 
             // check for the plugin title
-            if ($data['Title'] == $pluginTitle) {
+            if ($data['Title'] === $pluginTitle) {
 
                 // return the plugin folder/file
                 return $installedPlugin;
