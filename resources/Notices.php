@@ -57,7 +57,9 @@ class Notices
                 ACF_GF_FIELD_TEXTDOMAIN), 'http://www.gravityforms.com');
         }
         
-        if ($notice) $this->createNotice($notice, $inline, $alt);
+        if ($notice) {
+            $this->createNotice($notice, $inline, $alt);
+        }
     }
 
     /**
@@ -94,7 +96,9 @@ class Notices
                 ACF_GF_FIELD_TEXTDOMAIN), $installUrl);
         }
 
-        if ($notice) $this->createNotice($notice, $inline, $alt);
+        if ($notice) {
+            $this->createNotice($notice, $inline, $alt);
+        }
     }
 
     /**
