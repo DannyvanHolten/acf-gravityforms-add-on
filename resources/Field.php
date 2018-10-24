@@ -3,7 +3,7 @@
 namespace ACFGravityformsField;
 
 use acf_field;
-use GFFormsModel;
+use GFAPI;
 
 class Field extends acf_field
 {
@@ -29,15 +29,16 @@ class Field extends acf_field
         $this->defaults = [
             'return_format' => 'form_object',
             'multiple'      => 0,
-            'allow_null'    => 0
+            'allow_null'    => 0,
+            'default_value' => 0,
         ];
 
         // Get our notices up and running
         $this->notices = new Notices();
 
-	    if (class_exists('GFFormsModel')) {
-		    $this->forms = GFFormsModel::get_forms();
-	    }
+        if (class_exists('GFAPI')) {
+            $this->forms = GFAPI::get_forms();
+        }
 
         // Execute the parent constructor as well
         parent::__construct();
@@ -86,6 +87,14 @@ class Field extends acf_field
             ],
             'layout'  => 'horizontal'
         ]);
+
+        acf_render_field_setting( $field, array(
+    			'label'			=> __('Default Form Id','acf'),
+    			'instructions'	=> __('Appears when creating a new post','acf'),
+    			'type'			=> 'number',
+    			'name'			=> 'default_value',
+    		));
+
     }
 
     /**
@@ -106,7 +115,7 @@ class Field extends acf_field
         }
 
         foreach ($this->forms as $form) {
-            $choices[ $form->id ] = $form->title;
+            $choices[$form['id']] = $form['title'];
         }
 
         // Override field settings and start rendering
@@ -138,6 +147,8 @@ class Field extends acf_field
                 || (int)$field['value'] === (int)$formId
             ) {
                 $selected = ' selected';
+            } else if (isset($field['default_value']) && $field['default_value'] === $formId) {
+              $selected = ' selected';
             }
 
             $fieldOptions .= '<option value="' . $formId . '"' . $selected . '>' . $formTitle . '</option>';
@@ -237,7 +248,7 @@ class Field extends acf_field
     public function hasValidForms()
     {
         // Stop if Gravityforms is not active
-        if (!class_exists('GFFormsModel')) {
+        if (!class_exists('GFAPI')) {
             $this->notices->isGravityformsActive(true, true);
 
             return false;
