@@ -10,7 +10,7 @@ Copyright: Danny van Holten
 */
 
 if (!defined('ABSPATH')) {
-    exit;
+	exit;
 } // Exit if accessed directly
 
 // Define multiple necessary constants
