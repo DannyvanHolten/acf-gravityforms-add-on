@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Say Hello GmbH]
+## [1.2.2] - 2019-08-08
+### Changed
+* Move GFFormsModel::get_forms() out of constructor
+* PHP Code Beautify; composer update
+
 ## [Unreleased]
 ## [1.2.1] - 2017-10-4
 ### Changed
@@ -43,7 +49,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 0.1 - 2017-03-25
 ### Added
-* The repo is set up 
+* The repo is set up
 
 [Unreleased]: https://github.com/dannyvanholten/acf-gravityforms-add-on/compare/1.2...HEAD
 [1.2.1]: https://github.com/dannyvanholten/acf-gravityforms-add-on/compare/1.2...1.2.1
