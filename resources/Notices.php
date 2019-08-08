@@ -13,18 +13,14 @@ class Notices
      */
     public $forms;
 
-    public function __construct()
-    {
-        if (class_exists('GFFormsModel')) {
-            $this->forms = GFFormsModel::get_forms();
-        }
-    }
-
     /**
      * Make sure all hooks are being executed.
      */
     public function addHooks()
     {
+		if (class_exists('GFFormsModel')) {
+            $this->forms = GFFormsModel::get_forms();
+        }
         add_action('admin_notices', [$this, 'isGravityFormsActive']);
         add_action('admin_notices', [$this, 'isAdvancedCustomFieldsActive']);
     }
