@@ -4,6 +4,7 @@ namespace ACFGravityformsField;
 
 use acf_field;
 use GFFormsModel;
+use GFAPI;
 
 class Field extends acf_field
 {
