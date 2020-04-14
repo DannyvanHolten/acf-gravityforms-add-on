@@ -4,7 +4,7 @@ Donate link: http://www.dannyvanholten.com/
 Tags: gravityforms, gravity form, forms, form, acf, advanced custom fields, fields, custom fields
 Requires at least: 4.6
 Tested up to: 4.7.5
-Stable tag: 1.2.3
+Stable tag: 1.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,3 @@ or if you make use of WPackagist
 == Changelog ==
 
 Further changes can be found in the [changelog](https://github.com/DannyvanHolten/acf-gravityforms-add-on/blob/master/CHANGELOG.md)
-
-= 0.1 =
-* The repo is set up
