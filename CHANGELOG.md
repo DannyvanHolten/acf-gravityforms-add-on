@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.2.4] - 2020-04-14
+* Update version numbers.
+* Update Composer installers.
+* No functional changes.
+
 ## [1.2.3] - 2019-08-14
 * Fix GFAPI namespacing error
 
