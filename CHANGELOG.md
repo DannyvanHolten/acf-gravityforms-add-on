@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.2.5] - 2020-09-16
+* Fix namespace in Field class.
+* Use correct object property notation in Field class.
+* Move addNotices into admin_init hook.
+* Composer autoloader update.
+* Add (dev) formatting ruleset file.
+
 ## [1.2.4] - 2020-04-14
 * Update version numbers.
 * Update Composer installers.
