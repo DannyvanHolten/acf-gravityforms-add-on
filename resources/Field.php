@@ -106,7 +106,7 @@ class Field extends acf_field
 		}
 
 		foreach ($this->forms as $form) {
-			$choices[ $form->id ] = $form->title;
+			$choices[ $form['id'] ] = $form['title'];
 		}
 
 		// Override field settings and start rendering
