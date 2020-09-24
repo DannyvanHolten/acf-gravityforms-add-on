@@ -33,7 +33,7 @@ class FieldForV4 extends acf_field
 	 *
 	 * @var array
 	 */
-	public $forms;
+	public $forms = array();
 
 	public function __construct()
 	{
@@ -48,10 +48,6 @@ class FieldForV4 extends acf_field
 
 		// Get our notices up and running
 		$this->notices = new Notices();
-
-		if (class_exists('GFFormsModel')) {
-			$this->forms = GFFormsModel::get_forms();
-		}
 
 		// Execute the parent constructor as well
 		parent::__construct();
@@ -149,7 +145,7 @@ class FieldForV4 extends acf_field
 			return false;
 		}
 
-		foreach ($this->forms as $form) {
+		foreach ($this->get_forms() as $form) {
 			$choices[ $form->id ] = $form->title;
 		}
 
@@ -192,5 +188,17 @@ class FieldForV4 extends acf_field
 	{
 		$fieldObject = new Field();
 		return $fieldObject->processValue($value, $field);
+	}
+
+	/**
+	 * Get all forms
+	 *
+	 * @return array
+	 */
+	private function get_forms() {
+		if ( empty( $this->forms ) && class_exists('GFFormsModel') ) {
+			$this->forms = GFFormsModel::get_forms();
+		}
+		return $this->forms;
 	}
 }

@@ -4,6 +4,7 @@ namespace ACFGravityformsField;
 
 use acf_field;
 use GFAPI;
+use GFFormsModel;
 
 class Field extends acf_field
 {
@@ -19,7 +20,7 @@ class Field extends acf_field
 	 *
 	 * @var array
 	 */
-	public $forms;
+	public $forms = array();
 
 	public function __construct()
 	{
@@ -34,10 +35,6 @@ class Field extends acf_field
 
 		// Get our notices up and running
 		$this->notices = new Notices();
-
-		if (class_exists('GFAPI')) {
-			$this->forms = GFAPI::get_forms();
-		}
 
 		// Execute the parent constructor as well
 		parent::__construct();
@@ -105,7 +102,7 @@ class Field extends acf_field
 			return false;
 		}
 
-		foreach ($this->forms as $form) {
+		foreach ($this->get_forms() as $form) {
 			$choices[ $form['id'] ] = $form['title'];
 		}
 
@@ -244,12 +241,24 @@ class Field extends acf_field
 		}
 
 		// Check if there are forms and set our choices
-		if (!$this->forms) {
+		if (!$this->get_forms()) {
 			$this->notices->hasActiveGravityForms(true, true);
 
 			return false;
 		}
 
 		return true;
+	}
+
+	/**
+	 * Get all forms
+	 *
+	 * @return array
+	 */
+	private function get_forms() {
+		if ( empty( $this->forms ) && class_exists('GFFormsModel') ) {
+			$this->forms = GFFormsModel::get_forms();
+		}
+		return $this->forms;
 	}
 }
