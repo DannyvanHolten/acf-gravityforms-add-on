@@ -12,7 +12,7 @@ class Init
 	/**
 	 * Make sure all hooks are being executed.
 	 */
-	private function addHooks()
+	public function addHooks()
 	{
 		add_action('acf/include_field_types', [$this, 'addField']);
 		add_action('acf/register_fields', [$this, 'addFieldforV4']);
