@@ -257,7 +257,7 @@ class Field extends acf_field
 	 */
 	private function get_forms() {
 		if ( empty( $this->forms ) && class_exists('GFFormsModel') ) {
-			$this->forms = GFFormsModel::get_forms();
+			$this->forms = GFAPI::get_forms();
 		}
 		return $this->forms;
 	}
