@@ -9,3 +9,4 @@ vendor/composer/LICENSE
 vendor/composer/installed.json
 !vendor/composer/autoload*
 !vendor/composer/ClassLoader.php
+.DS_Store
