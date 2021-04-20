@@ -18,9 +18,6 @@ class Notices
 	 */
 	public function addHooks()
 	{
-		if (class_exists('GFFormsModel')) {
-			$this->forms = GFFormsModel::get_forms();
-		}
 		add_action('admin_notices', [$this, 'isGravityFormsActive']);
 		add_action('admin_notices', [$this, 'isAdvancedCustomFieldsActive']);
 	}
@@ -45,6 +42,11 @@ class Notices
 	 */
 	public function hasActiveGravityForms($inline = '', $alt = '')
 	{
+
+		if (class_exists('GFFormsModel')) {
+			$this->forms = GFFormsModel::get_forms();
+		}
+
 		if (!$this->forms) {
 			$notice = sprintf(__(
 				' Warning: There are no active forms. You need to <a href="%s">Create a New Form</a> in order to use the Advanced Custom Fields: Gravityforms Add-on.',
