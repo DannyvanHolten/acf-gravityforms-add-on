@@ -49,10 +49,6 @@ class FieldForV4 extends acf_field
 		// Get our notices up and running
 		$this->notices = new Notices();
 
-		if (class_exists('GFFormsModel')) {
-			$this->forms = GFFormsModel::get_forms();
-		}
-
 		// Execute the parent constructor as well
 		parent::__construct();
 	}
@@ -71,7 +67,7 @@ class FieldForV4 extends acf_field
 		$key = $field['name'];
 
 		// Create Field Options HTML
-		?>
+?>
 		<tr class="field_option field_option_<?php echo $this->name; ?>">
 			<td class="label">
 				<label><?php echo __('Return Value', 'acf'); ?></label>
@@ -128,7 +124,7 @@ class FieldForV4 extends acf_field
 				]); ?>
 			</td>
 		</tr>
-		<?php
+<?php
 	}
 
 	/**
@@ -139,6 +135,11 @@ class FieldForV4 extends acf_field
 	 */
 	public function create_field($field)
 	{
+
+		if (class_exists('GFFormsModel')) {
+			$this->forms = GFFormsModel::get_forms();
+		}
+
 		// Set our defaults
 		$field = array_merge($this->defaults, $field);
 		$choices = [];
@@ -150,7 +151,7 @@ class FieldForV4 extends acf_field
 		}
 
 		foreach ($this->forms as $form) {
-			$choices[ $form->id ] = $form->title;
+			$choices[$form->id] = $form->title;
 		}
 
 		// Override field settings and start rendering
