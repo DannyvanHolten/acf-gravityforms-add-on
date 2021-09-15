@@ -38,7 +38,7 @@ class FieldForV4 extends acf_field
 	public function __construct()
 	{
 		$this->name = 'forms';
-		$this->label = __('Forms', 'gravityforms');
+		$this->label = __('Gravity Form', 'gravityforms');
 		$this->category = __('Relational', 'acf'); // Basic, Content, Choice, etc
 		$this->defaults = [
 			'return_format' => 'form_object',
