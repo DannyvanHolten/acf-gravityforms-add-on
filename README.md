@@ -4,7 +4,11 @@ Advanced Custom Field with which we can select Gravityforms.
 
 ## Getting started
 
-The plugin is available from the [WordPress plugin repository](http://www.wordpress.org/plugins/acf-gravityforms-add-on)
+The plugin is primarily available from the [WordPress plugin repository](http://www.wordpress.org/plugins/acf-gravityforms-add-on). It allows you to choose a Gravity Form in WordPress Admin and use the selected form ID in your Theme or Plugin to output the form.
+
+**This plugin does not have any effect on the output of the website**. It only adds a [custom ACF field type](https://www.advancedcustomfields.com/resources/creating-a-new-field-type/) for use in an [ACF field group](https://www.advancedcustomfields.com/resources/creating-a-field-group/).
+
+## Installation and usage
 
 1. Upload the plugin files to the `/wp-content/plugins/acf-gravityforms-add-on` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress.
