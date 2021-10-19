@@ -40,24 +40,24 @@ your own Plugin or Theme handles the output of the form. An example of how do do
 If you return an ID from your ACF field configuration:
 
 ```php
-$form = get_field('my-form');
-gravity_form($form, true, true, false, '', true, 1);
+$form_id = get_field('my-form');
+gravity_form($form_id);
 ```
 
 If you return an Object from your ACF field configuration:
 
 ```php
 $form = get_field('my-form');
-gravity_form($form['id'], true, true, false, '', true, 1);
+gravity_form($form['id']);
 ```
 
 If you return multiple Form IDs from your ACF field configuration:
 
 ```php
-$forms = get_field('my-form');
+$form_ids = get_field('my-form');
 
-foreach($forms as $form) {
-    gravity_form($form, true, true, false, '', true, 1);
+foreach($form_ids as $form_id) {
+    gravity_form($form_id);
 }
 ```
 
