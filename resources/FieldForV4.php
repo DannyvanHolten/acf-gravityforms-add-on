@@ -156,12 +156,7 @@ class FieldForV4 extends acf_field
 	 */
 	public function update_value($value, $post_id, $field)
 	{
-		// Strip empty array values
-		if (is_array($value)) {
-			$value = array_values(array_filter($value));
-		}
-
-		return $value;
+		return is_array($value) ? array_values(array_filter($value)) : $value;
 	}
 
 
