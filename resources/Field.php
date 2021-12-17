@@ -7,8 +7,6 @@ use GFAPI;
 
 class Field extends acf_field
 {
-	use CreateFieldTrait;
-
 	/**
 	 * Make sure we can easily access our notices
 	 *
@@ -49,27 +47,31 @@ class Field extends acf_field
 	public function render_field_settings($field)
 	{
 		// Render a field settings that will tell us if an empty field is allowed or not
+		$returnFormatChoices = [
+			'post_object' => __( 'Form Object', ACF_GF_FIELD_TEXTDOMAIN ),
+			'id'          => __( 'Form ID', ACF_GF_FIELD_TEXTDOMAIN ),
+		];
+
 		acf_render_field_setting($field, [
 			'label'        => __('Return Value', 'acf'),
 			'instructions' => __('Specify the returned value on front end', 'acf'),
 			'type'         => 'radio',
 			'name'         => 'return_format',
 			'layout'       => 'horizontal',
-			'choices'      => [
-				'post_object' => __('Form Object', ACF_GF_FIELD_TEXTDOMAIN),
-				'id'          => __('Form ID', ACF_GF_FIELD_TEXTDOMAIN)
-			],
+			'choices'      => $returnFormatChoices,
 		]);
 
 		// Render a field setting that will tell us if an empty field is allowed or not.
+		$choices = [
+			1 => __( 'Yes', 'acf' ),
+			0 => __( 'No', 'acf' ),
+		];
+
 		acf_render_field_setting($field, [
 			'label'   => __('Allow Null?', 'acf'),
 			'type'    => 'radio',
 			'name'    => 'allow_null',
-			'choices' => [
-				1 => __('Yes', 'acf'),
-				0 => __('No', 'acf'),
-			],
+			'choices' => $choices,
 			'layout'  => 'horizontal'
 		]);
 
@@ -78,10 +80,7 @@ class Field extends acf_field
 			'label'   => __('Select multiple values?', 'acf'),
 			'type'    => 'radio',
 			'name'    => 'multiple',
-			'choices' => [
-				1 => __('Yes', 'acf'),
-				0 => __('No', 'acf'),
-			],
+			'choices' => $choices,
 			'layout'  => 'horizontal'
 		]);
 	}
