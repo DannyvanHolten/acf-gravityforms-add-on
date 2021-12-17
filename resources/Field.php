@@ -116,31 +116,29 @@ class Field extends acf_field
 		// Create a css id for our field
 		$fieldId = str_replace(['[', ']'], ['-', ''], $field['name']);
 
+		$this->prepareDropdownMarkup( $field, $fieldId );
+	}
+
+	protected function prepareDropdownMarkup( $field, $fieldId )
+	{
 		// Check if we're allowing multiple selections.
-		$hiddenField = '';
-		$multiple = '';
+		$hiddenField  = '';
+		$multiple     = '';
 		$fieldOptions = '';
 
-		if ($field['multiple']) {
+		if ( $field['multiple'] ) {
 			$hiddenField = '<input type="hidden" name="{$field[\'name\']}">';
-			$multiple = '[]" multiple="multiple" data-multiple="1';
+			$multiple    = '[]" multiple="multiple" data-multiple="1';
 		}
 
 		// Check if we're allowing an empty form. If so, create a default option
-		if ($field['allow_null']) {
-			$fieldOptions .= '<option value="">' . __('- Select a form -', ACF_GF_FIELD_TEXTDOMAIN) . '</option>';
+		if ( $field['allow_null'] ) {
+			$fieldOptions .= '<option value="">' . __( '- Select a form -', ACF_GF_FIELD_TEXTDOMAIN ) . '</option>';
 		}
 
-		// Loop trough all our choices
-		foreach ($field['choices'] as $formId => $formTitle) {
-			$selected = '';
-
-			if ((is_array($field['value']) && in_array($formId, $field['value'], false))
-				|| (int)$field['value'] === (int)$formId
-			) {
-				$selected = ' selected';
-			}
-
+		// Loop through all our choices
+		foreach ( $field['choices'] as $formId => $formTitle ) {
+			$selected = $this->optionIsSelected( $field, $formId );
 			$fieldOptions .= '<option value="' . $formId . '"' . $selected . '>' . $formTitle . '</option>';
 		}
 
@@ -150,7 +148,15 @@ class Field extends acf_field
 		$fieldHhtml .= $fieldOptions;
 		$fieldHhtml .= '</select>';
 
-		echo $fieldHhtml;
+		return $fieldHhtml;
+	}
+
+	protected function optionIsSelected( $field, $formId )
+	{
+		return ( ( is_array( $field['value'] ) && in_array( $formId, $field['value'], false ) )
+		         || (int) $field['value'] === (int) $formId )
+			? ' selected'
+			: '';
 	}
 
 	/**
