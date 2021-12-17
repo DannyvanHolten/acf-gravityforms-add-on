@@ -67,38 +67,34 @@ class FieldForV4 extends acf_field
 		$key = $field['name'];
 
 		// Create Field Options HTML
-		$fieldReturnFormat = $this->createAcfField(
-			'radio',
-			'fields[' . $key . '][return_format]',
-			$field['return_format'],
-			[
-				'post_object' => __( 'Form Object', ACF_GF_FIELD_TEXTDOMAIN ),
-				'id'          => __( 'Form ID', ACF_GF_FIELD_TEXTDOMAIN ),
-			]
-		);
-		$this->tableRowMarkup( $this->name, __( 'Return Value', 'acf' ), $fieldReturnFormat );
+		$returnFormatChoices = [
+			'post_object' => __( 'Form Object', ACF_GF_FIELD_TEXTDOMAIN ),
+			'id'          => __( 'Form ID', ACF_GF_FIELD_TEXTDOMAIN ),
+		];
 
-		$fieldNull = $this->createAcfField(
-			'radio',
-			'fields[' . $key . '][allow_null]',
-			$field['allow_null'],
-			[
-				1 => __( 'Yes', 'acf' ),
-				0 => __( 'No', 'acf' ),
-			]
+		$this->tableRowMarkup( $this->name,
+			__( 'Return Value', 'acf' ),
+			$this->createAcfField( 'radio',
+				'fields[' . $key . '][return_format]',
+				$field['return_format'],
+				$returnFormatChoices )
 		);
-		$this->tableRowMarkup( $this->name, __( 'Allow Null?', 'acf' ), $fieldNull );
 
-		$fieldMultipleValues = $this->createAcfField(
-			'radio',
-			'fields[' . $key . '][multiple]',
-			$field['multiple'],
-			[
-				1 => __( 'Yes', 'acf' ),
-				0 => __( 'No', 'acf' ),
-			]
+		$choices = [
+			1 => __( 'Yes', 'acf' ),
+			0 => __( 'No', 'acf' ),
+		];
+
+		$this->tableRowMarkup(
+			$this->name,
+			__( 'Allow Null?', 'acf' ),
+			$this->createAcfField( 'radio', 'fields[' . $key . '][allow_null]', $field['allow_null'], $choices )
 		);
-		$this->tableRowMarkup( $this->name, __( 'Select multiple values?', 'acf' ), $fieldMultipleValues );
+
+		$this->tableRowMarkup( $this->name,
+			__( 'Select multiple values?', 'acf' ),
+			$this->createAcfField( 'radio', 'fields[' . $key . '][multiple]', $field['multiple'], $choices )
+		);
 	}
 
     private function tableRowMarkup($optionName, $labelTitle, $renderedField)
