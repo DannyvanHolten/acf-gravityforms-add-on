@@ -67,7 +67,7 @@ class FieldForV4 extends acf_field
 		$key = $field['name'];
 
 		// Create Field Options HTML
-		$returnValueRadio = $this->createAcfField(
+		$fieldReturnFormat = $this->createAcfField(
 			'radio',
 			'fields[' . $key . '][return_format]',
 			$field['return_format'],
@@ -76,9 +76,9 @@ class FieldForV4 extends acf_field
 				'id'          => __( 'Form ID', ACF_GF_FIELD_TEXTDOMAIN ),
 			]
 		);
-		$this->tableRowMarkup( $this->name, __( 'Return Value', 'acf' ), $returnValueRadio );
+		$this->tableRowMarkup( $this->name, __( 'Return Value', 'acf' ), $fieldReturnFormat );
 
-		$allowNullRadio = $this->createAcfField(
+		$fieldNull = $this->createAcfField(
 			'radio',
 			'fields[' . $key . '][allow_null]',
 			$field['allow_null'],
@@ -87,9 +87,9 @@ class FieldForV4 extends acf_field
 				0 => __( 'No', 'acf' ),
 			]
 		);
-		$this->tableRowMarkup( $this->name, __( 'Allow Null?', 'acf' ), $allowNullRadio );
+		$this->tableRowMarkup( $this->name, __( 'Allow Null?', 'acf' ), $fieldNull );
 
-		$allowMultipleValuesRadio = $this->createAcfField(
+		$fieldMultipleValues = $this->createAcfField(
 			'radio',
 			'fields[' . $key . '][multiple]',
 			$field['multiple'],
@@ -98,7 +98,7 @@ class FieldForV4 extends acf_field
 				0 => __( 'No', 'acf' ),
 			]
 		);
-		$this->tableRowMarkup( $this->name, __( 'Select multiple values?', 'acf' ), $allowMultipleValuesRadio );
+		$this->tableRowMarkup( $this->name, __( 'Select multiple values?', 'acf' ), $fieldMultipleValues );
 	}
 
     private function tableRowMarkup($optionName, $labelTitle, $renderedField)
@@ -114,7 +114,7 @@ class FieldForV4 extends acf_field
 	    );
     }
 
-	protected function createAcfField($type, $name, $value, $choices, $layout = 'horizontal' ) {
+	protected function createAcfField($type, $name, $value, $choices) {
 		do_action(
 			'acf/create_field',
 			[
@@ -122,7 +122,7 @@ class FieldForV4 extends acf_field
 				'name'    => $name,
 				'value'   => $value,
 				'choices' => $choices,
-				'layout'  => $layout,
+				'layout'  => 'horizontal',
 			]
 		);
 	}
