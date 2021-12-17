@@ -67,64 +67,64 @@ class FieldForV4 extends acf_field
 		$key = $field['name'];
 
 		// Create Field Options HTML
-?>
-		<tr class="field_option field_option_<?php echo $this->name; ?>">
-			<td class="label">
-				<label><?php echo __('Return Value', 'acf'); ?></label>
-			</td>
-			<td>
-				<?php
-				do_action('acf/create_field', [
-					'type'    => 'radio',
-					'name'    => 'fields[' . $key . '][return_format]',
-					'value'   => $field['return_format'],
-					'choices' => [
-						'post_object' => __('Form Object', ACF_GF_FIELD_TEXTDOMAIN),
-						'id' => __('Form ID', ACF_GF_FIELD_TEXTDOMAIN)
-					],
-					'layout'  => 'horizontal',
-				]); ?>
-			</td>
-		</tr>
+		$returnValueRadio = $this->createAcfField(
+			'radio',
+			'fields[' . $key . '][return_format]',
+			$field['return_format'],
+			[
+				'post_object' => __( 'Form Object', ACF_GF_FIELD_TEXTDOMAIN ),
+				'id'          => __( 'Form ID', ACF_GF_FIELD_TEXTDOMAIN ),
+			]
+		);
+		$this->tableRowMarkup( $this->name, __( 'Return Value', 'acf' ), $returnValueRadio );
 
-		<tr class="field_option field_option_<?php echo $this->name; ?>">
-			<td class="label">
-				<label><?php echo __('Allow Null?', 'acf'); ?></label>
-			</td>
-			<td>
-				<?php
-				do_action('acf/create_field', [
-					'type'    => 'radio',
-					'name'    => 'fields[' . $key . '][allow_null]',
-					'value'   => $field['allow_null'],
-					'choices' => [
-						1 => __('Yes', 'acf'),
-						0 => __('No', 'acf'),
-					],
-					'layout'  => 'horizontal',
-				]); ?>
-			</td>
-		</tr>
+		$allowNullRadio = $this->createAcfField(
+			'radio',
+			'fields[' . $key . '][allow_null]',
+			$field['allow_null'],
+			[
+				1 => __( 'Yes', 'acf' ),
+				0 => __( 'No', 'acf' ),
+			]
+		);
+		$this->tableRowMarkup( $this->name, __( 'Allow Null?', 'acf' ), $allowNullRadio );
 
-		<tr class="field_option field_option_<?php echo $this->name; ?>">
-			<td class="label">
-				<label><?php echo __('Select multiple values?', 'acf'); ?></label>
-			</td>
-			<td>
-				<?php
-				do_action('acf/create_field', [
-					'type'    => 'radio',
-					'name'    => 'fields[' . $key . '][multiple]',
-					'value'   => $field['multiple'],
-					'choices' => [
-						1 => __('Yes', 'acf'),
-						0 => __('No', 'acf'),
-					],
-					'layout'  => 'horizontal',
-				]); ?>
-			</td>
-		</tr>
-<?php
+		$allowMultipleValuesRadio = $this->createAcfField(
+			'radio',
+			'fields[' . $key . '][multiple]',
+			$field['multiple'],
+			[
+				1 => __( 'Yes', 'acf' ),
+				0 => __( 'No', 'acf' ),
+			]
+		);
+		$this->tableRowMarkup( $this->name, __( 'Select multiple values?', 'acf' ), $allowMultipleValuesRadio );
+	}
+
+    private function tableRowMarkup($optionName, $labelTitle, $renderedField)
+    {
+	    return sprintf( '
+            <tr class="field_option field_option_%s">
+                <td class="label"><label>%s</label></td>
+                <td>%s</td>
+            </tr>',
+		    $optionName,
+		    $labelTitle,
+		    $renderedField
+	    );
+    }
+
+	protected function createAcfField($type, $name, $value, $choices, $layout = 'horizontal' ) {
+		do_action(
+			'acf/create_field',
+			[
+				'type'    => $type,
+				'name'    => $name,
+				'value'   => $value,
+				'choices' => $choices,
+				'layout'  => $layout,
+			]
+		);
 	}
 
 	/**
@@ -135,7 +135,6 @@ class FieldForV4 extends acf_field
 	 */
 	public function create_field($field)
 	{
-
 		if (class_exists('GFFormsModel')) {
 			$this->forms = GFFormsModel::get_forms();
 		}
