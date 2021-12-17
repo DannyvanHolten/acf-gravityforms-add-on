@@ -159,7 +159,6 @@ class FieldForV4 extends acf_field
 		return is_array($value) ? array_values(array_filter($value)) : $value;
 	}
 
-
 	/**
 	 * Return a form object when not empty
 	 *
