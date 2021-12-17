@@ -94,7 +94,6 @@ class Field extends acf_field
 	 */
 	public function render_field($field)
 	{
-
 		if (class_exists('GFAPI')) {
 			$this->forms = GFAPI::get_forms();
 		}
