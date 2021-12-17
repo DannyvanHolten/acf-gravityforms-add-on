@@ -7,6 +7,8 @@ use GFAPI;
 
 class Field extends acf_field
 {
+	use CreateFieldTrait;
+
 	/**
 	 * Make sure we can easily access our notices
 	 *

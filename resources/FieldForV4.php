@@ -7,6 +7,8 @@ use GFFormsModel;
 
 class FieldForV4 extends acf_field
 {
+	use CreateFieldTrait;
+
 	/**
 	 * will hold info such as dir / path
 	 *
@@ -109,19 +111,6 @@ class FieldForV4 extends acf_field
 		    $renderedField
 	    );
     }
-
-	protected function createAcfField($type, $name, $value, $choices) {
-		do_action(
-			'acf/create_field',
-			[
-				'type'    => $type,
-				'name'    => $name,
-				'value'   => $value,
-				'choices' => $choices,
-				'layout'  => 'horizontal',
-			]
-		);
-	}
 
 	/**
 	 * Render our Gravity Form field with all the forms as options
