@@ -71,6 +71,10 @@ class FieldForV4 extends acf_field
 			'post_object' => __( 'Form Object', ACF_GF_FIELD_TEXTDOMAIN ),
 			'id'          => __( 'Form ID', ACF_GF_FIELD_TEXTDOMAIN ),
 		];
+		$choices = [
+			1 => __( 'Yes', 'acf' ),
+			0 => __( 'No', 'acf' ),
+		];
 
 		$this->tableRowMarkup( $this->name,
 			__( 'Return Value', 'acf' ),
@@ -79,18 +83,11 @@ class FieldForV4 extends acf_field
 				$field['return_format'],
 				$returnFormatChoices )
 		);
-
-		$choices = [
-			1 => __( 'Yes', 'acf' ),
-			0 => __( 'No', 'acf' ),
-		];
-
 		$this->tableRowMarkup(
 			$this->name,
 			__( 'Allow Null?', 'acf' ),
 			$this->createAcfField( 'radio', 'fields[' . $key . '][allow_null]', $field['allow_null'], $choices )
 		);
-
 		$this->tableRowMarkup( $this->name,
 			__( 'Select multiple values?', 'acf' ),
 			$this->createAcfField( 'radio', 'fields[' . $key . '][multiple]', $field['multiple'], $choices )
