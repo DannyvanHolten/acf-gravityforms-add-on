@@ -63,9 +63,6 @@ class FieldForV4 extends acf_field
 		// defaults?
 		$field = array_merge($this->defaults, $field);
 
-		// key is needed in the field names to correctly save the data
-		$key = $field['name'];
-
 		// Create Field Options HTML
 		$returnFormatChoices = [
 			'post_object' => __( 'Form Object', ACF_GF_FIELD_TEXTDOMAIN ),
@@ -79,18 +76,18 @@ class FieldForV4 extends acf_field
 		$this->tableRowMarkup( $this->name,
 			__( 'Return Value', 'acf' ),
 			$this->createAcfField( 'radio',
-				'fields[' . $key . '][return_format]',
+				'fields[' . $field['name'] . '][return_format]',
 				$field['return_format'],
 				$returnFormatChoices )
 		);
 		$this->tableRowMarkup(
 			$this->name,
 			__( 'Allow Null?', 'acf' ),
-			$this->createAcfField( 'radio', 'fields[' . $key . '][allow_null]', $field['allow_null'], $choices )
+			$this->createAcfField( 'radio', 'fields[' . $field['name'] . '][allow_null]', $field['allow_null'], $choices )
 		);
 		$this->tableRowMarkup( $this->name,
 			__( 'Select multiple values?', 'acf' ),
-			$this->createAcfField( 'radio', 'fields[' . $key . '][multiple]', $field['multiple'], $choices )
+			$this->createAcfField( 'radio', 'fields[' . $field['name'] . '][multiple]', $field['multiple'], $choices )
 		);
 	}
 
