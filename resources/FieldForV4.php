@@ -37,13 +37,13 @@ class FieldForV4 extends acf_field
 
 	public function __construct()
 	{
-		$this->name = 'forms';
-		$this->label = __('Gravity Form', 'gravityforms');
+		$this->name     = 'forms';
+		$this->label    = __('Gravity Form', 'gravityforms');
 		$this->category = __('Relational', 'acf'); // Basic, Content, Choice, etc
 		$this->defaults = [
 			'return_format' => 'form_object',
 			'multiple'      => 0,
-			'allow_null'    => 0
+			'allow_null'    => 0,
 		];
 
 		// Get our notices up and running
@@ -54,7 +54,7 @@ class FieldForV4 extends acf_field
 	}
 
 	/**
-	 * Create extra settings for our gravityforms field. These are visible when editing a field.
+	 * Create extra settings for our Gravity Forms field. These are visible when editing a field.
 	 *
 	 * @param $field
 	 */
@@ -65,49 +65,55 @@ class FieldForV4 extends acf_field
 
 		// Create Field Options HTML
 		$returnFormatChoices = [
-			'post_object' => __( 'Form Object', ACF_GF_FIELD_TEXTDOMAIN ),
-			'id'          => __( 'Form ID', ACF_GF_FIELD_TEXTDOMAIN ),
+			'post_object' => __('Form Object', ACF_GF_FIELD_TEXTDOMAIN),
+			'id'          => __('Form ID', ACF_GF_FIELD_TEXTDOMAIN),
 		];
-		$choices = [
-			1 => __( 'Yes', 'acf' ),
-			0 => __( 'No', 'acf' ),
+		$choices             = [
+			1 => __('Yes', 'acf'),
+			0 => __('No', 'acf'),
 		];
 
-		$this->tableRowMarkup( $this->name,
-			__( 'Return Value', 'acf' ),
-			$this->createAcfField( 'radio',
+		$this->tableRowMarkup(
+			$this->name,
+			__('Return Value', 'acf'),
+			$this->createAcfField(
+				'radio',
 				'fields[' . $field['name'] . '][return_format]',
 				$field['return_format'],
-				$returnFormatChoices )
+				$returnFormatChoices
+			)
 		);
 		$this->tableRowMarkup(
 			$this->name,
-			__( 'Allow Null?', 'acf' ),
-			$this->createAcfField( 'radio', 'fields[' . $field['name'] . '][allow_null]', $field['allow_null'], $choices )
+			__('Allow Null?', 'acf'),
+			$this->createAcfField('radio', 'fields[' . $field['name'] . '][allow_null]', $field['allow_null'], $choices)
 		);
-		$this->tableRowMarkup( $this->name,
-			__( 'Select multiple values?', 'acf' ),
-			$this->createAcfField( 'radio', 'fields[' . $field['name'] . '][multiple]', $field['multiple'], $choices )
+		$this->tableRowMarkup(
+			$this->name,
+			__('Select multiple values?', 'acf'),
+			$this->createAcfField('radio', 'fields[' . $field['name'] . '][multiple]', $field['multiple'], $choices)
 		);
 	}
 
-    private function tableRowMarkup($optionName, $labelTitle, $renderedField)
-    {
-	    return sprintf( '
-            <tr class="field_option field_option_%s">
-                <td class="label"><label>%s</label></td>
-                <td>%s</td>
-            </tr>',
-		    $optionName,
-		    $labelTitle,
-		    $renderedField
-	    );
-    }
+	private function tableRowMarkup($optionName, $labelTitle, $renderedField)
+	{
+		return sprintf(
+			'
+			<tr class="field_option field_option_%s">
+				<td class="label"><label>%s</label></td>
+				<td>%s</td>
+			</tr>',
+			$optionName,
+			$labelTitle,
+			$renderedField
+		);
+	}
 
 	/**
 	 * Render our Gravity Form field with all the forms as options
 	 *
 	 * @param $field
+	 *
 	 * @return bool
 	 */
 	public function create_field($field)
@@ -117,7 +123,7 @@ class FieldForV4 extends acf_field
 		}
 
 		// Set our defaults
-		$field = array_merge($this->defaults, $field);
+		$field   = array_merge($this->defaults, $field);
 		$choices = [];
 
 		// Check if we have some valid forms
@@ -132,7 +138,7 @@ class FieldForV4 extends acf_field
 
 		// Override field settings and start rendering
 		$field['choices'] = $choices;
-		$field['type'] = 'select';
+		$field['type']    = 'select';
 
 		do_action('acf/create_field', $field);
 	}
@@ -140,11 +146,11 @@ class FieldForV4 extends acf_field
 	/**
 	 *  This filter is applied to the $value before it is updated in the db
 	 *
-	 *  @param  $value - the value which will be saved in the database
-	 *  @param  $post_id - the $post_id of which the value will be saved
-	 *  @param  $field - the field array holding all the field options
+	 * @param  $value   - the value which will be saved in the database
+	 * @param  $post_id - the $post_id of which the value will be saved
+	 * @param  $field   - the field array holding all the field options
 	 *
-	 *  @return $value - the modified value
+	 * @return array $value - the modified value
 	 */
 	public function update_value($value, $post_id, $field)
 	{
@@ -157,6 +163,7 @@ class FieldForV4 extends acf_field
 	 * @param $value
 	 * @param $postId
 	 * @param $field
+	 *
 	 * @return array|bool
 	 */
 	public function format_value_for_api($value, $postId, $field)
