@@ -181,10 +181,8 @@ class Field extends acf_field
 	 *  This filter is applied to the $value before it is updated in the db
 	 *
 	 * @param  $value - the value which will be saved in the database
-	 * @param  $post_id - the $post_id of which the value will be saved
-	 * @param  $field - the field array holding all the field options
 	 *
-	 * @return $value - the modified value
+	 * @return array|mixed $value - the modified value
 	 */
 	public function update_value($value)
 	{
