@@ -48,8 +48,8 @@ class Field extends acf_field
 	{
 		// Render a field settings that will tell us if an empty field is allowed or not
 		$returnFormatChoices = [
-			'post_object' => __( 'Form Object', ACF_GF_FIELD_TEXTDOMAIN ),
-			'id'          => __( 'Form ID', ACF_GF_FIELD_TEXTDOMAIN ),
+			'post_object' => __('Form Object', ACF_GF_FIELD_TEXTDOMAIN),
+			'id'          => __('Form ID', ACF_GF_FIELD_TEXTDOMAIN),
 		];
 
 		acf_render_field_setting($field, [
@@ -63,8 +63,8 @@ class Field extends acf_field
 
 		// Render a field setting that will tell us if an empty field is allowed or not.
 		$choices = [
-			1 => __( 'Yes', 'acf' ),
-			0 => __( 'No', 'acf' ),
+			1 => __('Yes', 'acf'),
+			0 => __('No', 'acf'),
 		];
 
 		acf_render_field_setting($field, [
@@ -116,45 +116,49 @@ class Field extends acf_field
 		// Create a css id for our field
 		$fieldId = str_replace(['[', ']'], ['-', ''], $field['name']);
 
-		$this->prepareDropdownMarkup( $field, $fieldId );
+		$this->prepareDropdownMarkup($field, $fieldId);
 	}
 
-	protected function prepareDropdownMarkup( $field, $fieldId )
+	protected function prepareDropdownMarkup($field, $fieldId)
 	{
 		// Check if we're allowing multiple selections.
 		$hiddenField  = '';
 		$multiple     = '';
 		$fieldOptions = '';
 
-		if ( $field['multiple'] ) {
-			$hiddenField = '<input type="hidden" name="{$field[\'name\']}">';
+		if ($field['multiple']) {
+			$hiddenField = '<input type="hidden" name="' . $field['name'] . '">';
 			$multiple    = '[]" multiple="multiple" data-multiple="1';
 		}
 
 		// Check if we're allowing an empty form. If so, create a default option
-		if ( $field['allow_null'] ) {
-			$fieldOptions .= '<option value="">' . __( '- Select a form -', ACF_GF_FIELD_TEXTDOMAIN ) . '</option>';
+		if ($field['allow_null']) {
+			$fieldOptions .= '<option value="">' . __('- Select a form -', ACF_GF_FIELD_TEXTDOMAIN) . '</option>';
 		}
 
 		// Loop through all our choices
-		foreach ( $field['choices'] as $formId => $formTitle ) {
-			$selected = $this->optionIsSelected( $field, $formId );
-			$fieldOptions .= '<option value="' . $formId . '"' . $selected . '>' . $formTitle . '</option>';
+		foreach ($field['choices'] as $formId => $formTitle) {
+			$fieldOptions .= sprintf(
+				'<option value="%s" %s>%s</option>',
+				$formId,
+				$this->optionIsSelected($field, $formId),
+				$formTitle
+			);
 		}
 
-		// Start building the html for our field
-		$fieldHhtml = $hiddenField;
-		$fieldHhtml .= '<select id="' . $fieldId . '" name="' . $field['name'] . $multiple . '">';
-		$fieldHhtml .= $fieldOptions;
-		$fieldHhtml .= '</select>';
-
-		return $fieldHhtml;
+		return sprintf(
+			'%s <select id="%s" name="%s">%s</select>',
+			$hiddenField,
+			$fieldId,
+			$field['name'] . $multiple,
+			$fieldOptions
+		);
 	}
 
-	protected function optionIsSelected( $field, $formId )
+	protected function optionIsSelected($field, $formId)
 	{
-		return ( ( is_array( $field['value'] ) && in_array( $formId, $field['value'], false ) )
-		         || (int) $field['value'] === (int) $formId )
+		return ((is_array($field['value']) && in_array($formId, $field['value'], false))
+				 || (int)$field['value'] === (int)$formId)
 			? ' selected'
 			: '';
 	}
