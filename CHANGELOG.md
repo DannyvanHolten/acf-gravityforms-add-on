@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.2.10] - 2022-01-10
+
+-   Fix composer command typo. (Props @cezarpopa.)
+-   Update README and core version support number.
+
+## [1.2.9] - 2021-09-15
+
+-   Modify label for clarity in backend field selector.
+
+## [1.2.8] - 2021-04-20
+
+-   Move get_forms call out of constructor.
+
 ## [1.2.7] - 2021-01-12
 
 -   Force-bump "tested to" version number in README.
