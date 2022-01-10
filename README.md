@@ -20,7 +20,7 @@ You can also install Advanced Custom Fields: Gravityforms Add-on using Composer.
 
 …or if you make use of WPackagist, …
 
-`composer require wpackagist/acf-gravityforms-add-on`
+`composer require wpackagist-plugin/acf-gravityforms-add-on`
 
 ## Using Advanced Custom Fields: Gravityforms Add-on
 
