@@ -34,7 +34,13 @@ class Init
 	 */
 	public function addField()
 	{
-		new Field();
+		$field = new Field();
+
+		// Added 31.3.2022 to avoid errors when using “show in REST”
+		// https://wordpress.org/support/topic/fatal-error-when-show-in-rest-is-active/
+		if (function_exists('acf_register_field_type')) {
+			acf_register_field_type($field);
+		}
 	}
 
 	/**
