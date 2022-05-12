@@ -120,10 +120,16 @@ class Field extends acf_field
 		$hiddenField = '';
 		$multiple = '';
 		$fieldOptions = '';
+		$disabled = '';
 
 		if ($field['multiple']) {
 			$hiddenField = '<input type="hidden" name="{$field[\'name\']}">';
 			$multiple = '[]" multiple="multiple" data-multiple="1';
+		}
+
+		if ( isset( $field['disabled'] ) && $field['disabled'] && !$field['multiple']) {
+			$hiddenField = '<input type="hidden" name="' . $field['name'] . '">';
+			$disabled = ' disabled="disabled" ';
 		}
 
 		// Check if we're allowing an empty form. If so, create a default option
@@ -146,7 +152,7 @@ class Field extends acf_field
 
 		// Start building the html for our field
 		$fieldHhtml = $hiddenField;
-		$fieldHhtml .= '<select id="' . $fieldId . '" name="' . $field['name'] . $multiple . '">';
+		$fieldHhtml .= '<select id="' . $fieldId . '" name="' . $field['name'] . $multiple . '"' . $disabled . '>';
 		$fieldHhtml .= $fieldOptions;
 		$fieldHhtml .= '</select>';
 
