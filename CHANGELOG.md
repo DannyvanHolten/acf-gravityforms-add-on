@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.3.0] - 2022-05-12
+
+-   Sort list of available, selectable forms by title instead of ID.
+
 ## [1.2.11] - 2022-03-31
 
 -   Avoid errors when using “show in REST”
