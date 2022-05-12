@@ -44,7 +44,7 @@ class Notices
 	{
 
 		if (class_exists('GFFormsModel')) {
-			$this->forms = GFFormsModel::get_forms();
+			$this->forms = GFFormsModel::get_forms(true, false, 'title');
 		}
 
 		if (!$this->forms) {

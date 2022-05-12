@@ -137,7 +137,7 @@ class FieldForV4 extends acf_field
 	{
 
 		if (class_exists('GFFormsModel')) {
-			$this->forms = GFFormsModel::get_forms();
+			$this->forms = GFFormsModel::get_forms(true, false, 'title');
 		}
 
 		// Set our defaults

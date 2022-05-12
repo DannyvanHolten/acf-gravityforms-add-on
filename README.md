@@ -31,8 +31,8 @@ Now we know that we can easily use it to build our fields :)
 
 ### Output of the form in the frontend
 
-This plugin doesn't integrate any code to the frontend of the website. You will need to ensure that 
-your own Plugin or Theme handles the output of the form. An example of how do do this is detailed in 
+This plugin doesn't integrate any code to the frontend of the website. You will need to ensure that
+your own Plugin or Theme handles the output of the form. An example of how do do this is detailed in
 [this blog post](https://www.gravityforms.com/blog/embed-forms-using-code/) on the Gravity Forms website.
 
 #### Getting the form ID
@@ -67,6 +67,6 @@ Want to get involved and improve Advanced Custom Fields: Gravityforms Add-on? Fo
 
 ## Credits
 
-This plugin is currently maintained by [Say Hello GmbH](https://sayhello.ch/), a specialist WordPress agency in Spiez, Switzerland.
+This plugin is maintained by [Say Hello GmbH](https://sayhello.ch/), a specialist WordPress agency in Spiez, Switzerland.
 
 The plugin was initially developed by [Danny van Holten](https://github.com/DannyvanHolten) based on work by [@stormuk](https://github.com/stormuk/Gravity-Forms-ACF-Field) ([@lgladdy](https://github.com/lgladdy) & [@adampope](https://github.com/adampope)). Be sure to follow them!

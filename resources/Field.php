@@ -94,7 +94,7 @@ class Field extends acf_field
 	{
 
 		if (class_exists('GFAPI')) {
-			$this->forms = GFAPI::get_forms();
+			$this->forms = GFAPI::get_forms(true, false, 'title');
 		}
 
 		// Set our defaults
