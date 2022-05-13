@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.3.2] - 2022-05-13
+
+-   Adds a filter to allow developers to modify the field HTML. This filter is not applied to fields in ACF version 4.
+
+## [1.3.1] - 2022-05-12
+
+-   Fixes fatal error by removeing the Composer platform check.
+
 ## [1.3.0] - 2022-05-12
 
 -   Sort list of available, selectable forms by title instead of ID.

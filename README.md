@@ -61,6 +61,14 @@ foreach($form_ids as $form_id) {
 }
 ```
 
+#### Filtering the field HTML
+
+Version 1.3.2 added a plain HTML filter to the output of the field. This filter is not applied to fields in ACF version 4.
+
+```php
+apply_filters('acf-gravityforms-add-on/fieldHTML', string $fieldHtml, array $field, string $multiple)
+```
+
 ## Getting involved
 
 Want to get involved and improve Advanced Custom Fields: Gravityforms Add-on? Fork this repo and whenever you have something just make a pull request. After review we might add it to the [Gravityforms ACF Field GitHub Repository](https://github.com/DannyvanHolten/acf-gravityforms-add-on).
