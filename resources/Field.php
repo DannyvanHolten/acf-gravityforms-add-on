@@ -145,12 +145,12 @@ class Field extends acf_field
 		}
 
 		// Start building the html for our field
-		$fieldHhtml = $hiddenField;
-		$fieldHhtml .= '<select id="' . $fieldId . '" name="' . $field['name'] . $multiple . '">';
-		$fieldHhtml .= $fieldOptions;
-		$fieldHhtml .= '</select>';
+		$fieldHtml = $hiddenField;
+		$fieldHtml .= '<select id="' . $fieldId . '" name="' . $field['name'] . $multiple . '">';
+		$fieldHtml .= $fieldOptions;
+		$fieldHtml .= '</select>';
 
-		echo $fieldHhtml;
+		echo apply_filters('acf-gravityforms-add-on/fieldHTML', $fieldHtml, $field, $multiple);
 	}
 
 	/**
