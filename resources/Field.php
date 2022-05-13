@@ -119,7 +119,7 @@ class Field extends acf_field
 		// Check if we're allowing multiple selections.
 		$hiddenField = '';
 		$multiple = '';
-		$fieldOptions = '';
+		$field_options = '';
 
 		if ($field['multiple']) {
 			$hiddenField = '<input type="hidden" name="{$field[\'name\']}">';
@@ -128,7 +128,7 @@ class Field extends acf_field
 
 		// Check if we're allowing an empty form. If so, create a default option
 		if ($field['allow_null']) {
-			$fieldOptions .= '<option value="">' . __('- Select a form -', ACF_GF_FIELD_TEXTDOMAIN) . '</option>';
+			$field_options .= '<option value="">' . __('- Select a form -', ACF_GF_FIELD_TEXTDOMAIN) . '</option>';
 		}
 
 		// Loop trough all our choices
@@ -141,16 +141,16 @@ class Field extends acf_field
 				$selected = ' selected';
 			}
 
-			$fieldOptions .= '<option value="' . $formId . '"' . $selected . '>' . $formTitle . '</option>';
+			$field_options .= '<option value="' . $formId . '"' . $selected . '>' . $formTitle . '</option>';
 		}
 
 		// Start building the html for our field
-		$fieldHtml = $hiddenField;
-		$fieldHtml .= '<select id="' . $fieldId . '" name="' . $field['name'] . $multiple . '">';
-		$fieldHtml .= $fieldOptions;
-		$fieldHtml .= '</select>';
+		$field_html = $hiddenField;
+		$field_html .= '<select id="' . $fieldId . '" name="' . $field['name'] . $multiple . '">';
+		$field_html .= $field_options;
+		$field_html .= '</select>';
 
-		echo apply_filters('acf-gravityforms-add-on/fieldHTML', $fieldHtml, $field, $multiple);
+		echo apply_filters('acf-gravityforms-add-on/field_html', $field_html, $field, $field_options, $multiple);
 	}
 
 	/**

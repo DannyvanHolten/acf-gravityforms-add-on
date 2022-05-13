@@ -3,7 +3,7 @@ Contributors: DannyvanHolten, markhowellsmead
 Tags: gravityforms, gravity form, forms, form, acf, advanced custom fields, fields, custom fields
 Requires at least: 4.6
 Tested up to: 5.9.2
-Stable tag: 1.3.2
+Stable tag: 1.3.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,7 +44,7 @@ You can also install Advanced Custom Fields: Gravityforms Add-on using Composer.
 
 Version 1.3.2 added a plain HTML filter to the output of the field. This filter is not applied to fields in ACF version 4.
 
-`apply_filters('acf-gravityforms-add-on/fieldHTML', string $fieldHtml, array $field, string $multiple)`
+`apply_filters('acf-gravityforms-add-on/field_html', string $field_html, array $field, string $multiple)`
 
 == Changelog ==
 
