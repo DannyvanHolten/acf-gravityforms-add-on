@@ -44,7 +44,7 @@ You can also install Advanced Custom Fields: Gravityforms Add-on using Composer.
 
 Version 1.3.2 added a plain HTML filter to the output of the field. This filter is not applied to fields in ACF version 4.
 
-`apply_filters('acf-gravityforms-add-on/field_html', string $field_html, array $field, string $multiple)`
+`apply_filters('acf-gravityforms-add-on/field_html', string $field_html, array $field, string $field_options, string $multiple)`
 
 == Changelog ==
 
