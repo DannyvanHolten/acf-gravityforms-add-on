@@ -63,7 +63,7 @@ foreach($form_ids as $form_id) {
 
 #### Filtering the field HTML
 
-Versions 1.3.2/1.3.3 added a plain HTML filter to the output of the field. This filter is not applied to fields in ACF version 4.
+Versions 1.3.2/1.3.3/1.3.4 added a plain HTML filter to the output of the field. This filter is not applied to fields in ACF version 4.
 
 ```php
 apply_filters('acf-gravityforms-add-on/field_html', string $field_html, array $field, string $field_options, string $multiple)
