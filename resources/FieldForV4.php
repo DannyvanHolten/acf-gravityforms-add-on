@@ -79,8 +79,8 @@ class FieldForV4 extends acf_field
 					'name'    => 'fields[' . $key . '][return_format]',
 					'value'   => $field['return_format'],
 					'choices' => [
-						'post_object' => __('Form Object', ACF_GF_FIELD_TEXTDOMAIN),
-						'id' => __('Form ID', ACF_GF_FIELD_TEXTDOMAIN)
+						'post_object' => __('Form Object', 'acf-gravityforms-add-on'),
+						'id' => __('Form ID', 'acf-gravityforms-add-on')
 					],
 					'layout'  => 'horizontal',
 				]); ?>

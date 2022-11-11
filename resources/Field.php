@@ -54,8 +54,8 @@ class Field extends acf_field
 			'name'         => 'return_format',
 			'layout'       => 'horizontal',
 			'choices'      => [
-				'post_object' => __('Form Object', ACF_GF_FIELD_TEXTDOMAIN),
-				'id'          => __('Form ID', ACF_GF_FIELD_TEXTDOMAIN)
+				'post_object' => __('Form Object', 'acf-gravityforms-add-on'),
+				'id'          => __('Form ID', 'acf-gravityforms-add-on')
 			],
 		]);
 
@@ -128,7 +128,7 @@ class Field extends acf_field
 
 		// Check if we're allowing an empty form. If so, create a default option
 		if ($field['allow_null']) {
-			$field_options .= '<option value="">' . __('- Select a form -', ACF_GF_FIELD_TEXTDOMAIN) . '</option>';
+			$field_options .= '<option value="">' . __('- Select a form -', 'acf-gravityforms-add-on') . '</option>';
 		}
 
 		// Loop trough all our choices

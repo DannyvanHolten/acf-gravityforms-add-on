@@ -7,6 +7,8 @@ Version: 1.3.4
 Author: Say Hello GmbH
 Author URI: http://www.sayhello.ch/
 Copyright: Say Hello GmbH
+ * Text Domain: acf-gravityforms-add-on
+ * Domain Path: /languages
 */
 
 if (!defined('ABSPATH')) {
@@ -15,8 +17,10 @@ if (!defined('ABSPATH')) {
 
 // Define multiple necessary constants
 define('ACF_GF_FIELD_VERSION', '1.3.4');
-define('ACF_GF_FIELD_TEXTDOMAIN', 'acf-gravityforms-add-on');
 define('ACF_GF_FIELD_LANGUAGES', dirname(plugin_basename(__FILE__)) . '/languages/');
+
+// This remains defined just in case anyone is using it, but it is no longer used by this plugin.
+define('ACF_GF_FIELD_TEXTDOMAIN', 'acf-gravityforms-add-on');
 
 define('ACF_GF_FIELD_ASSETS', plugin_dir_url(__FILE__));
 define('ACF_GF_FIELD_RESOURCES', __DIR__ . '/resources/');
