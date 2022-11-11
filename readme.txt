@@ -1,21 +1,19 @@
-=== Advanced Custom Fields: Gravityforms Add-on ===
+=== Advanced Custom Fields: Gravity Forms Add-on ===
 Contributors: DannyvanHolten, markhowellsmead
-Tags: gravityforms, gravity form, forms, form, acf, advanced custom fields, fields, custom fields
+Tags: gravityforms, gravity form, forms, form, acf, advanced custom fields, fields, custom fields, sayhellogmbh
 Requires at least: 4.6
-Tested up to: 5.9.2
+Tested up to: 6.1
 Stable tag: 1.3.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Advanced Custom Field with which we can select Gravityforms.
+Provides an Advanced Custom Field which allows a WordPress editorial user or administrator to select a Gravity Form as part of a field group configuration.
 
 == Description ==
 
-Advanced Custom Field with which we can select Gravityforms.
+Provides an Advanced Custom Field which allows a WordPress editorial user or administrator to select a Gravity Form as part of a field group configuration.
 
-Finally the Advanced Custom Fields: Gravityforms Add-on is available on the WordPress plugin repository!
-
-Full documentation can be found on: [Gravityforms ACF Field GitHub Repository.](https://github.com/DannyvanHolten/acf-gravityforms-add-on)
+Full documentation can be found in the [plugin's GitHub Repository](https://github.com/DannyvanHolten/acf-gravityforms-add-on).
 
 == Installation ==
 
@@ -25,7 +23,7 @@ The plugin is available from the [WordPress plugin repository](http://www.wordpr
 2. Activate the plugin through the 'Plugins' screen in WordPress.
 3. Add a new field of type 'Forms' to the required ACF field group.
 
-You can also install Advanced Custom Fields: Gravityforms Add-on using Composer.
+You can also install Advanced Custom Fields: Gravity Forms Add-on using Composer.
 
 `composer require dannyvanholten/acf-gravityforms-add-on`
 
@@ -38,7 +36,7 @@ You can also install Advanced Custom Fields: Gravityforms Add-on using Composer.
 1. You can select 'Form' as a field type while adding an ACF Field.
 2. The actual selection of the field.
 3. You can select all your Gravity Forms.
-4. If ACF or Gravityforms is not added it will give a notice (Notices from [WP Growl Notifications](https://wordpress.org/plugins/wp-growl-notifications).
+4. If ACF or Gravity Forms is not added it will give a notice (Notices from [WP Growl Notifications](https://wordpress.org/plugins/wp-growl-notifications).
 
 == Development ==
 

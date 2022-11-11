@@ -1,13 +1,15 @@
 <?php
 /*
-Plugin Name: Advanced Custom Fields: Gravityforms Add-on
-Plugin URI: https://github.com/dannyvanholten/acf-gravityforms-add-on
-Description: Advanced Custom Field with which we can select Gravityforms.
-Version: 1.3.4
-Author: Say Hello GmbH
-Author URI: http://www.sayhello.ch/
-Copyright: Say Hello GmbH
+ * Plugin Name: Advanced Custom Fields: Gravity Forms Add-on
+ * Plugin URI: https://github.com/dannyvanholten/acf-gravityforms-add-on
+ * Description: Provides an Advanced Custom Field which allows a WordPress editorial user or administrator to select a Gravity Form as part of a field group configuration.
+ * Version: 1.3.4
  * Requires at least: 4.6
+ * License: GPL v2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Author: Say Hello GmbH
+ * Author URI: http://www.sayhello.ch/
+ * Copyright: Say Hello GmbH
  * Text Domain: acf-gravityforms-add-on
  * Domain Path: /languages
 */
