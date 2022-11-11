@@ -3,7 +3,7 @@
  * Plugin Name: Advanced Custom Fields: Gravity Forms Add-on
  * Plugin URI: https://github.com/dannyvanholten/acf-gravityforms-add-on
  * Description: Provides an Advanced Custom Field which allows a WordPress editorial user or administrator to select a Gravity Form as part of a field group configuration.
- * Version: 1.3.4
+ * Version: 1.3.5
  * Requires at least: 4.6
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
 } // Exit if accessed directly
 
 // Define multiple necessary constants
-define('ACF_GF_FIELD_VERSION', '1.3.4');
+define('ACF_GF_FIELD_VERSION', '1.3.5');
 define('ACF_GF_FIELD_LANGUAGES', dirname(plugin_basename(__FILE__)) . '/languages/');
 
 // This remains defined just in case anyone is using it, but it is no longer used by this plugin.

@@ -1,9 +1,9 @@
 {
     "name": "dannyvanholten/acf-gravityforms-add-on",
-    "description": "Advanced Custom Fields: Gravityforms Add-on",
+    "description": "Advanced Custom Fields: Gravity Forms Add-on",
     "type": "wordpress-plugin",
     "license": "GPL-3.0+",
-    "version": "1.3.3",
+    "version": "1.3.5",
     "authors": [
         {
             "name": "Say Hello GmbH",

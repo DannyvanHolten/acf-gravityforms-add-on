@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.3.5] - 2022-11-11
+
+-   Update readme, core version support and plugin requirement header. No functional changes.
+
+## [1.3.4] - 2022-05-16
+
+-   Update readme. No functional changes.
+
+## [1.3.3] - 2022-05-13
+
+-   Variable and hook naming, readme changes.
+
 ## [1.3.2] - 2022-05-13
 
 -   Adds a filter to allow developers to modify the field HTML. This filter is not applied to fields in ACF version 4.
