@@ -7,6 +7,7 @@ Version: 1.3.4
 Author: Say Hello GmbH
 Author URI: http://www.sayhello.ch/
 Copyright: Say Hello GmbH
+ * Requires at least: 4.6
  * Text Domain: acf-gravityforms-add-on
  * Domain Path: /languages
 */
